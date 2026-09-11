@@ -6,7 +6,17 @@
 
 ## Origins
 
-Kognia was originally conceived in 2024 as a final project for the **Web Site Management** course at Universidad APEC. In 2026, the original academic e-learning concept was rebuilt from the ground up as a production-oriented SaaS platform.
+Kognia originated from a final project developed at **Universidad APEC (UNAPEC)** for the course **Gestión de Sitios Web (ISO-700)** during the **May–August 2024** academic period, under professor **Delby Acosta Taveras**.
+
+The original team was:
+
+- **Francis Jairo Matias Rosario** — A00115261
+- **Eliandres Rodriguez Cepeda** — A00112070
+- **Ramon Rosario Rodriguez** — A00110961
+
+In 2026, the original academic e-learning concept was recovered and rebuilt from the ground up as a production-oriented SaaS platform under the name **Kognia**.
+
+See [`docs/original-unapec-project.md`](docs/original-unapec-project.md) for the full academic project lineage.
 
 ## Stack
 
