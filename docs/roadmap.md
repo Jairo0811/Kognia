@@ -1,13 +1,21 @@
 # Kognia Roadmap
 
-## Phase 0 — Foundation
+## Phase 0 — Foundation ✅
 
 - Product identity and repository structure
+- Branching strategy (`main` → `dev` → `feature/*`)
 - Clean Architecture definition
-- React + TypeScript frontend foundation
-- .NET backend foundation
+- React 19 + TypeScript + Vite frontend foundation
+- .NET 10 backend foundation
 - SQL Server development environment
 - Docker Compose
+- EF Core SQL Server persistence baseline
+- Dependency injection modules
+- React Router shell
+- TanStack Query provider
+- ESLint configuration
+- GitHub Actions CI baseline
+- `/health` API endpoint
 - Documentation baseline
 
 ## Phase 1 — Identity
