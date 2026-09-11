@@ -18,6 +18,8 @@ jobs:
         run: dotnet restore backend/Kognia.slnx
       - name: Build
         run: dotnet build backend/Kognia.slnx --configuration Release --no-restore
+      - name: Test
+        run: dotnet test backend/Kognia.slnx --configuration Release --no-build
 
   frontend:
     runs-on: ubuntu-latest
