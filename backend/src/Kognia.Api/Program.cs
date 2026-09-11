@@ -1,5 +1,8 @@
+using Kognia.Api.Endpoints;
 using Kognia.Application;
 using Kognia.Infrastructure;
+using Kognia.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await IdentitySeeder.SeedAsync(roleManager);
+}
 
 app.MapGet("/health", () => Results.Ok(new
 {
@@ -25,5 +36,7 @@ app.MapGet("/health", () => Results.Ok(new
     status = "ok",
     utc = DateTimeOffset.UtcNow
 }));
+
+app.MapAuthEndpoints();
 
 app.Run();
