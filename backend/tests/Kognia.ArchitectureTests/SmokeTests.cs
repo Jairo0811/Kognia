@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace Kognia.ArchitectureTests;
 
 public sealed class SmokeTests
