@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Kognia.Domain/Kognia.Domain.csproj" />
+    <Project Path="src/Kognia.Application/Kognia.Application.csproj" />
+    <Project Path="src/Kognia.Infrastructure/Kognia.Infrastructure.csproj" />
+    <Project Path="src/Kognia.Api/Kognia.Api.csproj" />
+  </Folder>
+</Solution>
