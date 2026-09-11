@@ -88,4 +88,4 @@ npm run dev
 
 Next milestone: **Phase 1 — Identity**.
 
-See [`docs/roadmap.md`](docs/roadmap.md) for the complete product roadmap.
+See [`docs/roadmap.md`](docs/roadmap.md) and [`docs/phase-0-foundation.md`](docs/phase-0-foundation.md) for project status and scope.
