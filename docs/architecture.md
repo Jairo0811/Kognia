@@ -21,6 +21,21 @@ Kognia.Infrastructure -> Kognia.Application -> Kognia.Domain
 
 The Domain project must not depend on infrastructure or presentation concerns.
 
+## Dependency injection
+
+Phase 0 establishes explicit composition modules:
+
+- `Kognia.Application.AddApplication()`
+- `Kognia.Infrastructure.AddInfrastructure(configuration)`
+
+The API acts as the composition root and wires both modules during startup.
+
+## Persistence
+
+SQL Server is the primary relational database and Entity Framework Core is the persistence layer. The foundation includes `KogniaDbContext`, SQL Server registration and automatic discovery of entity configurations from the Infrastructure assembly.
+
+Database migrations will begin when the first persistent Identity model is introduced in Phase 1.
+
 ## Frontend architecture
 
 The React application is feature-oriented:
@@ -46,6 +61,8 @@ src/
 └── utils/
 ```
 
+The Phase 0 shell includes React Router and TanStack Query providers. Feature folders are introduced incrementally as modules are implemented.
+
 ## Core domains
 
 - Identity & Profiles
@@ -58,12 +75,6 @@ src/
 - Reviews & Favorites
 - Notifications
 - Analytics
-
-## Data platform
-
-- SQL Server
-- Entity Framework Core
-- Database migrations managed from Infrastructure
 
 ## Authentication
 
@@ -81,6 +92,12 @@ Initial roles:
 - Student
 - Instructor
 - Administrator
+
+## Testing and CI
+
+Backend test projects live under `backend/tests`. The foundation includes an initial architecture smoke test.
+
+GitHub Actions validates pull requests targeting `dev` or `main` by running backend restore/build/tests and frontend install/lint/build.
 
 ## Non-functional priorities
 
