@@ -1,43 +1,91 @@
 # Kognia
 
-Kognia is a modern e-learning SaaS platform focused on courses, learning paths, assessments, certificates, subscriptions, and measurable learner progress.
+**Kognia** is a modern learning SaaS platform focused on courses, learning paths, assessments, certifications, subscriptions, and measurable learner progress.
+
+> Aprende. Avanza. Domina.
 
 ## Origins
 
-Kognia was originally conceived in 2024 as a final project for the **Web Site Management** course at Universidad APEC (UNAPEC), Dominican Republic. In 2026, the original academic concept began a ground-up rebuild as a production-oriented learning platform.
+Kognia was originally conceived in 2024 as a final project for the **Web Site Management** course at Universidad APEC. In 2026, the original academic e-learning concept was rebuilt from the ground up as a production-oriented SaaS platform.
 
-## Status
+## Stack
 
-🚧 Rebuild in progress — Foundation phase.
+### Backend
+- .NET 10
+- ASP.NET Core Web API
+- Entity Framework Core
+- SQL Server
+- Clean Architecture
 
-## Planned stack
+### Frontend
+- React 19
+- TypeScript
+- Vite
+- React Router
+- TanStack Query
 
-- **Frontend:** React 19, TypeScript, Vite
-- **Backend:** .NET 10, ASP.NET Core Web API
-- **Architecture:** Clean Architecture
-- **Database:** SQL Server + Entity Framework Core
-- **Authentication:** ASP.NET Core Identity, JWT, Refresh Tokens
-- **Realtime:** SignalR
-- **Deployment:** container-ready
+### Tooling
+- Docker Compose
+- ESLint
+- GitHub Actions
+- xUnit
 
-## Core product areas
+## Repository Structure
 
-- Authentication and profiles
-- Course catalog
-- Instructor course management
-- Learning player and progress tracking
-- Assessments and quizzes
-- Certificates
-- Subscription management
-- Student, instructor, and admin dashboards
-- Analytics and reporting
+```text
+Kognia/
+├── backend/
+│   ├── src/
+│   │   ├── Kognia.Domain/
+│   │   ├── Kognia.Application/
+│   │   ├── Kognia.Infrastructure/
+│   │   └── Kognia.Api/
+│   └── tests/
+│       └── Kognia.ArchitectureTests/
+├── frontend/
+├── docs/
+├── .github/workflows/
+└── docker-compose.yml
+```
 
-## Repository strategy
+## Development Flow
 
-- `main`: stable branch
-- `dev`: integration branch
-- `feature/*`: feature development
+```text
+main
+└── dev
+    └── feature/*
+```
 
-## License
+`main` represents stable releases. Integration happens in `dev`, and feature work is developed through short-lived `feature/*` branches.
 
-License to be defined before public/commercial distribution.
+## Local Development
+
+### Database
+
+```bash
+docker compose up -d
+```
+
+### Backend
+
+```bash
+cd backend
+dotnet restore Kognia.slnx
+dotnet run --project src/Kognia.Api
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Current Status
+
+**Phase 0 — Foundation: complete.**
+
+Next milestone: **Phase 1 — Identity**.
+
+See [`docs/roadmap.md`](docs/roadmap.md) for the complete product roadmap.
