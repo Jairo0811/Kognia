@@ -57,9 +57,16 @@ La trazabilidad histórica ampliada se encuentra en [`docs/original-unapec-proje
 
 ## 🧭 Continuidad académica
 
-Kognia se documenta como parte de la colección de proyectos académicos evolucionados de UNAPEC. En los proyectos actualmente relacionados no se ha verificado una segunda coincidencia inequívoca por profesor o integrante del equipo original que justifique una línea de continuidad adicional.
+### 👥 Continuidad por estudiante
 
-Por esa razón, esta sección conserva únicamente el origen académico comprobado y evita inferir relaciones no documentadas.
+**Eliandres Rodriguez Cepeda (A00112070)** participó junto a Francis Jairo Matias Rosario en **Kognia**, correspondiente a **Gestión de Sitios Web (ISO-700)** durante **Mayo - Agosto 2024**. Posteriormente, ambos vuelven a coincidir en [**SOAForge**](https://github.com/Jairo0811/SOA-Forge) durante **Septiembre - Diciembre 2026**, donde Eliandres participa exclusivamente en **Integración de Aplicaciones con Tecnología Open Source (ISO-815)**.
+
+| Orden | Asignatura | Proyecto | Período |
+|---:|---|---|---|
+| 1 | Gestión de Sitios Web (ISO-700) | **Kognia** | Mayo - Agosto 2024 |
+| 2 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**SOAForge**](https://github.com/Jairo0811/SOA-Forge) | Septiembre - Diciembre 2026 |
+
+La continuidad se documenta por coincidencia verificable de **nombre completo y matrícula**. Kognia y SOAForge son proyectos independientes y no existe dependencia técnica entre ellos.
 
 ---
 
