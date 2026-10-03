@@ -69,8 +69,20 @@ Integration coverage includes:
 - Student quiz payload does not expose correct answers
 - Automatic quiz scoring
 
+## Validation completed
+
+GitHub Actions CI #84 completed successfully:
+
+- Backend restore ✅
+- Backend build ✅
+- Architecture tests ✅
+- API integration tests ✅
+- Frontend install ✅
+- Frontend lint ✅
+- Frontend build ✅
+
 ## Release boundary
 
 PDF rendering/downloading of certificates, richer media telemetry, attempt limits, randomized question banks and commercial anti-cheating controls are intentionally outside this block and can be hardened in later product phases.
 
-Block 2 is ready for promotion only after backend tests, frontend lint/build and the complete CI workflow are green.
+Block 2 is functionally complete and ready to be promoted from `feature/block-2` to `dev`.
