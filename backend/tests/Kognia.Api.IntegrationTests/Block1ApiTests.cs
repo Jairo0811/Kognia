@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Xunit;
 
 namespace Kognia.Api.IntegrationTests;
@@ -16,13 +17,8 @@ public sealed class KogniaApiFactory : WebApplicationFactory<Program>
         builder.UseEnvironment("Testing");
         builder.ConfigureServices(services =>
         {
-            var descriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<KogniaDbContext>));
-
-            if (descriptor is not null)
-            {
-                services.Remove(descriptor);
-            }
+            services.RemoveAll<DbContextOptions<KogniaDbContext>>();
+            services.RemoveAll<KogniaDbContext>();
 
             services.AddDbContext<KogniaDbContext>(options =>
                 options.UseInMemoryDatabase($"KogniaTests-{Guid.NewGuid()}"));
