@@ -56,3 +56,5 @@ La continuidad queda respaldada por la coincidencia verificable de **nombre comp
           git diff --cached --quiet && exit 0
           git commit -m "docs: correct SOAForge as ISO-810"
           git push origin HEAD:docs/fix-soaforge-iso810
+
+# retry
