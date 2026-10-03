@@ -53,6 +53,7 @@ app.MapGet("/health", () => Results.Ok(new
 
 app.MapAuthEndpoints();
 app.MapCatalogEndpoints();
+app.MapBlock2Endpoints();
 
 app.Run();
 
