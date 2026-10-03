@@ -6,6 +6,7 @@ using Kognia.Domain.Catalog;
 using Kognia.Infrastructure.Identity;
 using Kognia.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
