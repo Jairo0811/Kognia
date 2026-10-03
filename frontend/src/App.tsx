@@ -1,6 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { api, AuthSession, clearSession, getSession, saveSession } from './lib/api';
+import {
+  CertificateVerifyPage,
+  CertificatesPage,
+  InstructorAssessmentsPage,
+  LearningCoursePage,
+  MyLearningPage,
+  QuizPage,
+} from './block2';
 
 type CourseSummary = {
   id: string;
@@ -65,7 +73,9 @@ function Layout({ children }: { children: React.ReactNode }) {
           <Link to="/courses">Cursos</Link>{' '}
           {session ? (
             <>
-              <Link to="/instructor">Instructor</Link>{' '}
+              <Link to="/my-learning">Mi aprendizaje</Link>{' '}
+              <Link to="/certificates">Certificados</Link>{' '}
+              {session.roles.some((role) => role === 'Instructor' || role === 'Administrator') && <><Link to="/instructor">Instructor</Link>{' '}</>}
               <button type="button" onClick={logout}>Cerrar sesión</button>
             </>
           ) : (
@@ -188,8 +198,11 @@ function ForgotPasswordPage() {
 }
 
 function CoursesPage() {
+  const session = getSession();
   const [courses, setCourses] = useState<CourseSummary[]>([]);
   const [query, setQuery] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     api<CourseSummary[]>(`/api/catalog/courses${query ? `?q=${encodeURIComponent(query)}` : ''}`)
@@ -197,11 +210,26 @@ function CoursesPage() {
       .catch(() => setCourses([]));
   }, [query]);
 
+  async function enroll(courseId: string) {
+    if (!session) {
+      navigate('/login');
+      return;
+    }
+    try {
+      await api(`/api/learning/courses/${courseId}/enroll`, { method: 'POST' });
+      setMessage('Inscripción completada. Ya puedes comenzar el curso.');
+      navigate(`/learn/${courseId}`);
+    } catch {
+      setMessage('No fue posible completar la inscripción.');
+    }
+  }
+
   return (
     <Layout>
       <main>
         <h1>Catálogo de cursos</h1>
         <label>Buscar cursos<input value={query} onChange={(e) => setQuery(e.target.value)} /></label>
+        {message && <p role="status">{message}</p>}
         {courses.length === 0 ? <p>No hay cursos publicados todavía.</p> : (
           <ul>
             {courses.map((course) => (
@@ -209,6 +237,7 @@ function CoursesPage() {
                 <h2>{course.title}</h2>
                 <p>{course.summary}</p>
                 <p>{course.category} · {course.level} · {course.lessons} lecciones</p>
+                <button type="button" onClick={() => void enroll(course.id)}>{session ? 'Inscribirme / continuar' : 'Inicia sesión para inscribirte'}</button>
               </li>
             ))}
           </ul>
@@ -339,7 +368,10 @@ function InstructorPage() {
         <section>
           <h2>Mis cursos</h2>
           {courses.length === 0 ? <p>No tienes cursos todavía.</p> : (
-            <ul>{courses.map((course) => <li key={course.id}>{course.title} — {course.status === 1 ? 'Publicado' : 'Borrador'} <button type="button" onClick={() => void openCourse(course.id)}>Editar contenido</button></li>)}</ul>
+            <ul>{courses.map((course) => <li key={course.id}>{course.title} — {course.status === 1 ? 'Publicado' : 'Borrador'}{' '}
+              <button type="button" onClick={() => void openCourse(course.id)}>Editar contenido</button>{' '}
+              <Link to={`/instructor/courses/${course.id}/assessments`}>Evaluaciones</Link>
+            </li>)}</ul>
           )}
         </section>
 
@@ -393,7 +425,13 @@ export function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/courses" element={<CoursesPage />} />
+      <Route path="/my-learning" element={<MyLearningPage />} />
+      <Route path="/learn/:courseId" element={<LearningCoursePage />} />
+      <Route path="/quiz/:quizId" element={<QuizPage />} />
+      <Route path="/certificates" element={<CertificatesPage />} />
+      <Route path="/certificates/verify/:verificationCode" element={<CertificateVerifyPage />} />
       <Route path="/instructor" element={<InstructorPage />} />
+      <Route path="/instructor/courses/:courseId/assessments" element={<InstructorAssessmentsPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
