@@ -46,3 +46,5 @@ app.MapAuthEndpoints();
 app.MapCatalogEndpoints();
 
 app.Run();
+
+public partial class Program;
