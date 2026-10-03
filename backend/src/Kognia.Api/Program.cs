@@ -2,6 +2,7 @@ using Kognia.Api.Endpoints;
 using Kognia.Application;
 using Kognia.Infrastructure;
 using Kognia.Infrastructure.Identity;
+using Kognia.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,9 @@ using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await IdentitySeeder.SeedAsync(roleManager);
+
+    var db = scope.ServiceProvider.GetRequiredService<KogniaDbContext>();
+    await CatalogSeeder.SeedAsync(db);
 }
 
 app.MapGet("/health", () => Results.Ok(new
@@ -38,5 +42,6 @@ app.MapGet("/health", () => Results.Ok(new
 }));
 
 app.MapAuthEndpoints();
+app.MapCatalogEndpoints();
 
 app.Run();
