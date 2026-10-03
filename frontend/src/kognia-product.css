@@ -1,0 +1,70 @@
+/* Product surfaces inspired by the approved Kognia mockups. */
+#main-content > nav[aria-label="Navegación de aprendizaje"]{
+  position:sticky;top:0;z-index:48;display:flex;align-items:center;gap:24px;
+  min-height:70px;padding:0 max(24px,calc((100vw - 1460px)/2));
+  background:#050c1cea;border-bottom:1px solid #17345f;backdrop-filter:blur(18px)
+}
+#main-content > nav[aria-label="Navegación de aprendizaje"] a{color:#9fb2d1;font-size:13px;font-weight:750}
+#main-content > nav[aria-label="Navegación de aprendizaje"] a:first-child{margin-right:auto;color:#fff;font-size:21px;font-weight:900}
+#main-content > nav[aria-label="Navegación de aprendizaje"] a:first-child:before{content:"K";display:inline-grid;place-items:center;width:36px;height:36px;margin-right:10px;border-radius:11px;background:linear-gradient(145deg,#2ce0ff,#1679ff 50%,#6c39ff);box-shadow:0 0 24px #168cff55;color:#fff;font-size:18px}
+#main-content > nav[aria-label="Navegación de aprendizaje"] a:hover{color:#fff}
+
+main:not(.k-home){background:linear-gradient(180deg,#07142d 0%,#061025 100%)}
+main:not(.k-home)>h1{font-size:clamp(30px,3vw,42px);letter-spacing:-1.4px;margin-bottom:8px}
+main:not(.k-home)>p:first-child{margin-top:0;color:#67d8ff}
+main:not(.k-home)>section{margin-top:22px;padding:24px;border:1px solid #193b69;border-radius:16px;background:linear-gradient(145deg,#0a1935,#071329);box-shadow:0 14px 34px #0003}
+main:not(.k-home)>section>h2{margin-top:0}
+
+/* KPI dashboards */
+main:not(.k-home) section dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;margin:18px 0 0}
+main:not(.k-home) section dl dt{grid-row:auto;color:#8fa4c8;font-size:12px;font-weight:750;padding:16px 16px 0;border:1px solid #1b4278;border-bottom:0;border-radius:13px 13px 0 0;background:#0b1a38}
+main:not(.k-home) section dl dd{margin:0;margin-top:-14px;padding:34px 16px 16px;border:1px solid #1b4278;border-top:0;border-radius:0 0 13px 13px;background:#0b1a38;color:#fff;font-size:26px;font-weight:900}
+
+/* Card collections */
+main:not(.k-home)>ul,main:not(.k-home)>section>ul{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+main:not(.k-home)>ul>li,main:not(.k-home)>section>ul>li{padding:18px;border:1px solid #1b3b6a;border-radius:14px;background:linear-gradient(145deg,#0b1b3a,#08142b);box-shadow:0 12px 30px #0003}
+main:not(.k-home)>ul>li h2,main:not(.k-home)>section>ul>li h2{margin:0 0 8px;font-size:18px}
+main:not(.k-home)>ul>li strong,main:not(.k-home)>section>ul>li strong{color:#fff}
+main:not(.k-home)>ul>li p,main:not(.k-home)>section>ul>li p{margin:8px 0}
+main:not(.k-home) progress{appearance:none;width:100%;height:8px;border:0;border-radius:20px;overflow:hidden;background:#152b50}
+main:not(.k-home) progress::-webkit-progress-bar{background:#152b50}
+main:not(.k-home) progress::-webkit-progress-value{background:linear-gradient(90deg,#20ddff,#1675ff,#6d3cff)}
+main:not(.k-home) progress::-moz-progress-bar{background:linear-gradient(90deg,#20ddff,#1675ff,#6d3cff)}
+
+/* Learning player */
+main:not(.k-home)>section article{margin-top:12px;padding:18px;border:1px solid #173762;border-radius:13px;background:#07162f}
+main:not(.k-home)>section article h3{margin-top:0}
+main:not(.k-home)>section article button{margin-top:6px}
+main:not(.k-home) fieldset{margin:0 0 16px;padding:18px;border:1px solid #1c4278;border-radius:14px;background:#081831}
+main:not(.k-home) legend{padding:0 8px;color:#fff;font-weight:800}
+main:not(.k-home) fieldset label{display:flex;grid-template-columns:none;align-items:center;gap:10px;margin:8px 0;padding:11px 12px;border:1px solid #18365f;border-radius:10px;background:#071329}
+main:not(.k-home) fieldset input[type="radio"]{width:auto;margin:0;min-height:auto}
+
+/* Certificates */
+main:not(.k-home)>ul>li:has(a[href*="certificates/verify"]){position:relative;overflow:hidden;min-height:180px;padding-left:104px}
+main:not(.k-home)>ul>li:has(a[href*="certificates/verify"]):before{content:"K";position:absolute;left:20px;top:20px;width:66px;height:88px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(180deg,#f5f1db,#d8c895);color:#1761c9;font-size:30px;font-weight:900;box-shadow:0 8px 25px #0005}
+
+/* Tables */
+main:not(.k-home) table{overflow:hidden;border:1px solid #1b3d70;border-radius:14px;background:#08162f}
+main:not(.k-home) thead{background:#0d2245}
+main:not(.k-home) th{color:#dce8fb;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+main:not(.k-home) td{color:#9fb2d2}
+main:not(.k-home) tbody tr:hover{background:#0b1e3e}
+
+/* Billing plans */
+main:not(.k-home)>section:first-of-type>ul>li:has(button){position:relative}
+main:not(.k-home)>section:first-of-type>ul>li:has(button) h3{font-size:22px;margin:0 0 8px}
+main:not(.k-home)>section:first-of-type>ul>li:has(button) p:nth-of-type(2){color:#fff;font-size:25px;font-weight:900}
+
+/* Status + notifications */
+[role="status"],[role="alert"]{border-radius:12px;background:#0b1e3d;border:1px solid #245493!important;color:#dbe8ff!important}
+main:not(.k-home) code{display:inline-block;padding:4px 7px;border-radius:7px;background:#020817;color:#61dcff}
+
+@media(max-width:900px){
+  #main-content > nav[aria-label="Navegación de aprendizaje"]{overflow:auto;white-space:nowrap;padding:0 18px}
+  main:not(.k-home)>section{padding:18px}
+}
+@media(max-width:640px){
+  main:not(.k-home)>ul,main:not(.k-home)>section>ul{grid-template-columns:1fr}
+  main:not(.k-home) section dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
