@@ -1,8 +1,15 @@
 <div align="center">
 
-# Kognia
+<p align="center">
+  <img src="docs/images/kognia-logo.png" alt="Logo de Kognia" width="720" />
+</p>
 
+<p align="center">
 <img src="https://img.shields.io/badge/UNAPEC-ISO--700-003B70?style=for-the-badge" alt="UNAPEC ISO-700" />
+</p>
+
+
+
 <img src="https://img.shields.io/badge/Versión-0.1.0-2563EB?style=for-the-badge" alt="Versión 0.1.0" />
 <img src="https://img.shields.io/badge/Estado-Fase%200%20completada-14B8A6?style=for-the-badge" alt="Estado: Fase 0 completada" />
 <img src="https://img.shields.io/badge/Tipo-SaaS%20%7C%20Portafolio-6F42C1?style=for-the-badge" alt="SaaS y proyecto de portafolio" />
@@ -57,9 +64,21 @@ La trazabilidad histórica ampliada se encuentra en [`docs/original-unapec-proje
 
 ## 🧭 Continuidad académica
 
-Kognia se documenta como parte de la colección de proyectos académicos evolucionados de UNAPEC. En los proyectos actualmente relacionados no se ha verificado una segunda coincidencia inequívoca por profesor o integrante del equipo original que justifique una línea de continuidad adicional.
+### 👥 Continuidad por estudiante
 
-Por esa razón, esta sección conserva únicamente el origen académico comprobado y evita inferir relaciones no documentadas.
+**Eliandres Rodriguez Cepeda (A00112070)** participó junto a Francis Jairo Matias Rosario en **Kognia**, correspondiente a **Gestión de Sitios Web (ISO-700)** durante **Mayo - Agosto 2024**. Posteriormente, ambos vuelven a coincidir durante **Septiembre - Diciembre 2026** en dos proyectos distintos y paralelos de **Integración de Aplicaciones con Tecnología Open Source (ISO-815)**: [**SOAForge**](https://github.com/Jairo0811/SOA-Forge) y [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft).
+
+| Orden | Asignatura | Proyecto | Período |
+|---:|---|---|---|
+| 1 | Gestión de Sitios Web (ISO-700) | **Kognia** | Mayo - Agosto 2024 |
+| 2 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**SOAForge**](https://github.com/Jairo0811/SOA-Forge) | Septiembre - Diciembre 2026 |
+| 3 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft) | Septiembre - Diciembre 2026 |
+
+Las filas 2 y 3 pertenecen al **mismo período** y representan proyectos académicos paralelos, no una secuencia entre SOAForge y BonitaSoft. La continuidad queda respaldada por la coincidencia verificable de **nombre completo y matrícula**.
+
+> **Alcance de Eliandres:** su participación en 2026 corresponde exclusivamente a **ISO-815**. **Eliandres Rodriguez Cepeda no pertenece a ISO-810**.
+
+Los tres proyectos son independientes y no existe dependencia técnica entre ellos.
 
 ---
 
