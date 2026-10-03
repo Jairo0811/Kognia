@@ -31,6 +31,7 @@ using (var scope = app.Services.CreateScope())
     await IdentitySeeder.SeedAsync(roleManager);
 
     var db = scope.ServiceProvider.GetRequiredService<KogniaDbContext>();
+    await db.Database.EnsureCreatedAsync();
     await CatalogSeeder.SeedAsync(db);
 }
 
