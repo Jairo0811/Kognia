@@ -4,6 +4,7 @@ using Kognia.Infrastructure;
 using Kognia.Infrastructure.Identity;
 using Kognia.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +28,19 @@ app.UseAuthorization();
 
 using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<KogniaDbContext>();
+
+    if (app.Environment.IsEnvironment("Testing"))
+    {
+        await db.Database.EnsureCreatedAsync();
+    }
+    else
+    {
+        await db.Database.MigrateAsync();
+    }
+
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await IdentitySeeder.SeedAsync(roleManager);
-
-    var db = scope.ServiceProvider.GetRequiredService<KogniaDbContext>();
-    await db.Database.EnsureCreatedAsync();
     await CatalogSeeder.SeedAsync(db);
 }
 
