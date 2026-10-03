@@ -1,129 +1,58 @@
 # Kognia Roadmap
 
 ## Phase 0 — Foundation ✅
+Repository, Clean Architecture, React/.NET baselines, SQL Server, Docker and CI foundation.
 
-- Product identity and repository structure
-- Branching strategy (`main` → `dev` → `feature/*`)
-- Clean Architecture definition
-- React 19 + TypeScript + Vite frontend foundation
-- .NET 10 backend foundation
-- SQL Server development environment
-- Docker Compose
-- EF Core SQL Server persistence baseline
-- Dependency injection modules
-- React Router shell
-- TanStack Query provider
-- ESLint configuration
-- GitHub Actions CI baseline
-- `/health` API endpoint
-- Documentation baseline
+## Phase 1 — Identity ✅
+Registration, login, email confirmation, password recovery, JWT/refresh tokens and roles.
 
-## Phase 1 — Identity
+## Phase 2 — Course Catalog ✅
+Courses, categories, search and public course discovery.
 
-- Registration and login
-- Email confirmation
-- Password recovery
-- JWT + refresh tokens
-- Student, Instructor and Administrator roles
-- User profile
+## Phase 3 — Instructor CMS ✅
+Course authoring, sections, lessons and publication workflow.
 
-## Phase 2 — Course Catalog
+## Phase 4 — Learning Experience ✅
+Enrollment, course player, lesson progress and completion.
 
-- Courses and categories
-- Search and filters
-- Course detail page
-- Free/Premium visibility rules
+## Phase 5 — Assessments ✅
+Quizzes, questions, attempts, automatic grading and pass/fail results.
 
-## Phase 3 — Instructor CMS
+## Phase 6 — Certificates ✅
+Automatic certificates, unique verification codes and public verification.
 
-- Create/edit courses
-- Sections and lessons
-- Resources
-- Draft/publish workflow
+## Phase 7 — Subscription & Payments ✅
+Free/premium plans, provider-neutral billing persistence, sandbox checkout, invoices and cancellation lifecycle.
 
-## Phase 4 — Learning Experience
+## Phase 8 — Student Dashboard ✅
+Learning progress, course metrics, certificates, assessment status and subscription summary.
 
-- Course player
-- Lesson completion
-- Resume learning
-- Course progress
+## Phase 9 — Instructor Dashboard ✅
+Course performance, enrollment, completion and assessment metrics.
 
-## Phase 5 — Assessments
+## Phase 10 — Admin Portal ✅
+User/role administration, course moderation, review moderation and operational dashboard.
 
-- Quizzes
-- Questions and answer options
-- Attempts and grading
+## Phase 11 — Reviews & Favorites ✅
+Enrolled-student reviews and persistent course favorites.
 
-## Phase 6 — Certificates
+## Phase 12 — Notifications ✅
+Persistent notifications, read state, instructor review alerts and administrator broadcasts.
 
-- Completion certificates
-- Unique verification code
-- Public verification page
+## Phase 13 — Analytics ✅
+Student learning analytics, instructor engagement analytics and administrator commercial indicators.
 
-## Phase 7 — Subscriptions & Payments
+## Phase 14 — Accessibility & UX Hardening ✅
+Skip navigation, keyboard focus treatment, semantic status messaging, reduced-motion support, responsive layout and accessible metric/table patterns.
 
-- Free and Premium plans
-- Monthly and annual billing
-- Payment history
-- Cancellation and renewal
+## Phase 15 — Security & Commercial Hardening ✅
+Rate limiting, CORS allow-list configuration, HSTS, security headers, secure-production configuration guards and patched .NET package baseline.
 
-## Phase 8 — Student Dashboard
+## Phase 16 — Deployment / Release Candidate ✅
+Production API/web Dockerfiles, Nginx SPA/API proxy, production Compose template, liveness/readiness endpoints and release-candidate GitHub Actions validation.
 
-- Active courses
-- Completion metrics
-- Learning time
-- Certificates
+## Status
 
-## Phase 9 — Instructor Dashboard
+**All planned phases 0–16 are implemented.**
 
-- Course performance
-- Learner activity
-- Engagement metrics
-
-## Phase 10 — Admin Portal
-
-- Users
-- Instructors
-- Courses
-- Categories
-- Subscriptions
-- Moderation
-
-## Phase 11 — Engagement
-
-- Reviews
-- Favorites
-- Notifications
-
-## Phase 12 — Analytics
-
-- Conversion
-- Retention
-- MRR
-- Course completion
-- Satisfaction metrics
-
-## Phase 13 — Accessibility & UX Hardening
-
-- WCAG-oriented review
-- Keyboard navigation
-- Focus states
-- Contrast and semantic markup
-- Responsive hardening
-
-## Phase 14 — Security & Commercial Hardening
-
-- Rate limiting
-- Audit logging
-- Security headers
-- Permission review
-- Error handling
-- Production configuration
-
-## Phase 15 — Release Candidate
-
-- CI/CD
-- Deployment
-- Smoke tests
-- Documentation
-- Release checklist
+Kognia is a release candidate. Production launch still requires environment-owned secrets, infrastructure provisioning and real payment/email provider credentials where applicable.

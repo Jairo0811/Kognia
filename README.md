@@ -1,6 +1,6 @@
 # Kognia
 
-**Kognia** is a modern learning SaaS platform focused on courses, learning paths, assessments, certifications, subscriptions, and measurable learner progress.
+**Kognia** is a modern learning SaaS platform focused on courses, learning paths, assessments, certifications, subscriptions, engagement and measurable learner progress.
 
 > Aprende. Avanza. Domina.
 
@@ -21,10 +21,10 @@ See [`docs/original-unapec-project.md`](docs/original-unapec-project.md) for the
 ## Stack
 
 ### Backend
-- .NET 10
-- ASP.NET Core Web API
+- .NET 10 / ASP.NET Core Web API
 - Entity Framework Core
 - SQL Server
+- ASP.NET Core Identity + JWT/refresh tokens
 - Clean Architecture
 
 ### Frontend
@@ -34,11 +34,16 @@ See [`docs/original-unapec-project.md`](docs/original-unapec-project.md) for the
 - React Router
 - TanStack Query
 
-### Tooling
-- Docker Compose
-- ESLint
+### Platform
+- Docker / Docker Compose
+- Nginx
 - GitHub Actions
-- xUnit
+- xUnit integration and architecture tests
+- ESLint
+
+## Product Scope
+
+Kognia includes identity, course catalog and authoring, enrollment and learning progress, quizzes, certificates, subscriptions and billing persistence, student/instructor/admin dashboards, reviews, favorites, notifications and role-aware analytics.
 
 ## Repository Structure
 
@@ -50,12 +55,16 @@ Kognia/
 │   │   ├── Kognia.Application/
 │   │   ├── Kognia.Infrastructure/
 │   │   └── Kognia.Api/
-│   └── tests/
-│       └── Kognia.ArchitectureTests/
+│   ├── tests/
+│   └── Dockerfile
 ├── frontend/
+│   ├── src/
+│   ├── Dockerfile
+│   └── nginx.conf
 ├── docs/
 ├── .github/workflows/
-└── docker-compose.yml
+├── docker-compose.yml
+└── docker-compose.production.yml
 ```
 
 ## Development Flow
@@ -92,10 +101,20 @@ npm install
 npm run dev
 ```
 
+## Production Template
+
+Set strong environment-owned values for `MSSQL_SA_PASSWORD`, `JWT_KEY` and `PUBLIC_ORIGIN`, then build/run with:
+
+```bash
+docker compose -f docker-compose.production.yml up -d --build
+```
+
+Never deploy using the committed development JWT key or development SQL password; the API rejects those defaults outside Development/Testing.
+
 ## Current Status
 
-**Phase 0 — Foundation: complete.**
+**Phases 0–16: implemented.**
 
-Next milestone: **Phase 1 — Identity**.
+Kognia is in **Release Candidate** state, gated by CI and the dedicated Release Candidate workflow. Production launch still requires infrastructure provisioning and real provider credentials/services where applicable.
 
-See [`docs/roadmap.md`](docs/roadmap.md) and [`docs/phase-0-foundation.md`](docs/phase-0-foundation.md) for project status and scope.
+See [`docs/roadmap.md`](docs/roadmap.md), [`docs/final-block.md`](docs/final-block.md) and the block documents under `docs/` for scope and validation history.
