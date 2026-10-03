@@ -4,6 +4,7 @@ import { BillingPage, InstructorDashboardPage, StudentDashboardPage } from './bl
 import { AdminPage, CourseReviewsPage, FavoritesPage, NotificationsPage } from './block4';
 import { EngagementCatalogPage } from './engagementCatalog';
 import { AnalyticsPage } from './finalBlock';
+import { KogniaHome } from './KogniaHome';
 import { getSession } from './lib/api';
 
 export function Portal() {
@@ -13,17 +14,24 @@ export function Portal() {
 
   return <>
     <a className="skip-link" href="#main-content">Saltar al contenido principal</a>
-    <aside className="account-nav" aria-label="Accesos de cuenta">
-      <nav>
-        <Link to="/discover">Descubrir</Link>{' '}
-        <Link to="/billing">Planes</Link>{' '}
-        {session && <><Link to="/dashboard">Dashboard</Link>{' '}<Link to="/analytics">Analíticas</Link>{' '}<Link to="/favorites">Favoritos</Link>{' '}<Link to="/notifications">Notificaciones</Link>{' '}</>}
-        {isInstructor && <><Link to="/instructor/dashboard">Métricas instructor</Link>{' '}</>}
-        {isAdmin && <Link to="/admin">Administración</Link>}
-      </nav>
-    </aside>
+    {session && (
+      <aside className="account-nav" aria-label="Accesos de cuenta">
+        <nav>
+          <Link to="/">Inicio</Link>
+          <Link to="/discover">Descubrir</Link>
+          <Link to="/billing">Planes</Link>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/analytics">Analíticas</Link>
+          <Link to="/favorites">Favoritos</Link>
+          <Link to="/notifications">Notificaciones</Link>
+          {isInstructor && <Link to="/instructor/dashboard">Métricas instructor</Link>}
+          {isAdmin && <Link to="/admin">Administración</Link>}
+        </nav>
+      </aside>
+    )}
     <div id="main-content" tabIndex={-1}>
       <Routes>
+        <Route path="/" element={<KogniaHome />} />
         <Route path="/discover" element={<EngagementCatalogPage />} />
         <Route path="/billing" element={<BillingPage />} />
         <Route path="/dashboard" element={<StudentDashboardPage />} />
