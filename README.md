@@ -1,8 +1,15 @@
 <div align="center">
 
-# Kognia
+<p align="center">
+  <img src="docs/images/kognia-logo.png" alt="Logo de Kognia" width="720" />
+</p>
 
+<p align="center">
 <img src="https://img.shields.io/badge/UNAPEC-ISO--700-003B70?style=for-the-badge" alt="UNAPEC ISO-700" />
+</p>
+
+
+
 <img src="https://img.shields.io/badge/Versión-0.1.0-2563EB?style=for-the-badge" alt="Versión 0.1.0" />
 <img src="https://img.shields.io/badge/Estado-Fase%200%20completada-14B8A6?style=for-the-badge" alt="Estado: Fase 0 completada" />
 <img src="https://img.shields.io/badge/Tipo-SaaS%20%7C%20Portafolio-6F42C1?style=for-the-badge" alt="SaaS y proyecto de portafolio" />
