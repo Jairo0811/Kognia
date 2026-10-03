@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Kognia.Domain.Billing;
+using Kognia.Domain.Catalog;
 using Kognia.Domain.Learning;
 using Kognia.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -195,7 +196,7 @@ public static class Block3Endpoints
             .SingleOrDefaultAsync(x => x.CheckoutToken == checkoutToken && x.UserId == userId);
         if (payment is null) return Results.NotFound(new { message = "Checkout not found." });
         if (payment.Status == PaymentStatus.Paid)
-            return Results.Ok(new { payment.Id, payment.Status, payment.Subscription.Status });
+            return Results.Ok(new { payment.Id, paymentStatus = payment.Status, subscriptionStatus = payment.Subscription.Status });
 
         var now = DateTimeOffset.UtcNow;
         var otherActive = await db.Subscriptions
@@ -222,7 +223,7 @@ public static class Block3Endpoints
         return Results.Ok(new
         {
             payment.Id,
-            payment.Status,
+            paymentStatus = payment.Status,
             subscriptionId = payment.SubscriptionId,
             subscriptionStatus = payment.Subscription.Status,
             invoice = new { invoice.Id, invoice.Number, invoice.Status }
@@ -335,8 +336,8 @@ public static class Block3Endpoints
 
         var courseIds = await courseQuery.Select(x => x.Id).ToListAsync();
         var totalCourses = courseIds.Count;
-        var publishedCourses = await courseQuery.CountAsync(x => x.Status == Domain.Catalog.CourseStatus.Published);
-        var draftCourses = await courseQuery.CountAsync(x => x.Status == Domain.Catalog.CourseStatus.Draft);
+        var publishedCourses = await courseQuery.CountAsync(x => x.Status == CourseStatus.Published);
+        var draftCourses = await courseQuery.CountAsync(x => x.Status == CourseStatus.Draft);
         var totalEnrollments = await db.Enrollments.CountAsync(x => courseIds.Contains(x.CourseId));
         var completedEnrollments = await db.Enrollments.CountAsync(x => courseIds.Contains(x.CourseId) && x.Status == EnrollmentStatus.Completed);
         var certificateCount = await db.Certificates.CountAsync(x => courseIds.Contains(x.CourseId));
