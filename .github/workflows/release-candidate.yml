@@ -1,0 +1,40 @@
+name: Release Candidate
+
+on:
+  pull_request:
+    branches: [dev, main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Backend restore
+        run: dotnet restore backend/Kognia.slnx
+      - name: Backend build
+        run: dotnet build backend/Kognia.slnx --configuration Release --no-restore
+      - name: Backend tests
+        run: dotnet test backend/Kognia.slnx --configuration Release --no-build
+      - name: Frontend install
+        working-directory: frontend
+        run: npm install
+      - name: Frontend lint
+        working-directory: frontend
+        run: npm run lint
+      - name: Frontend build
+        working-directory: frontend
+        run: npm run build
+      - name: Frontend critical vulnerability audit
+        working-directory: frontend
+        run: npm audit --audit-level=critical
+      - name: Build API image
+        run: docker build -f backend/Dockerfile -t kognia-api:rc .
+      - name: Build web image
+        run: docker build -f frontend/Dockerfile -t kognia-web:rc .
