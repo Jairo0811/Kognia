@@ -13,6 +13,8 @@ namespace Kognia.Api.IntegrationTests;
 
 public sealed class KogniaApiFactory : WebApplicationFactory<Program>
 {
+    private readonly string _databaseName = $"KogniaTests-{Guid.NewGuid():N}";
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
@@ -23,7 +25,7 @@ public sealed class KogniaApiFactory : WebApplicationFactory<Program>
             services.RemoveAll<KogniaDbContext>();
 
             services.AddDbContext<KogniaDbContext>(options =>
-                options.UseInMemoryDatabase($"KogniaTests-{Guid.NewGuid()}"));
+                options.UseInMemoryDatabase(_databaseName));
         });
     }
 }
