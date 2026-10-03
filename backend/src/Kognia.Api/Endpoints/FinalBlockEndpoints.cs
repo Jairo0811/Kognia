@@ -51,9 +51,9 @@ public static class FinalBlockEndpoints
     {
         var userId = UserId(principal);
         if (userId is null) return Results.Unauthorized();
-        var ids = await db.Courses.AsNoTracking()
-            .Where(x => principal.IsInRole("Administrator") || x.InstructorUserId == userId)
-            .Select(x => x.Id).ToListAsync();
+        var courseQuery = db.Courses.AsNoTracking();
+        if (!principal.IsInRole("Administrator")) courseQuery = courseQuery.Where(x => x.InstructorUserId == userId);
+        var ids = await courseQuery.Select(x => x.Id).ToListAsync();
         var enrollments = await db.Enrollments.CountAsync(x => ids.Contains(x.CourseId));
         var completions = await db.Enrollments.CountAsync(x => ids.Contains(x.CourseId) && x.CompletedAtUtc != null);
         var reviews = await db.Set<Review>().Where(x => ids.Contains(x.CourseId) && x.IsVisible).ToListAsync();
