@@ -10,6 +10,16 @@ using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (!builder.Environment.IsDevelopment() && !builder.Environment.IsEnvironment("Testing"))
+{
+    var productionJwt = builder.Configuration["Jwt:Key"];
+    var productionConnection = builder.Configuration.GetConnectionString("KogniaConnection");
+    if (string.IsNullOrWhiteSpace(productionJwt) || productionJwt.Contains("DEV_ONLY", StringComparison.OrdinalIgnoreCase))
+        throw new InvalidOperationException("Production requires Jwt:Key from secure configuration.");
+    if (string.IsNullOrWhiteSpace(productionConnection) || productionConnection.Contains("Your_password123", StringComparison.OrdinalIgnoreCase))
+        throw new InvalidOperationException("Production requires KogniaConnection from secure configuration.");
+}
+
 builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
@@ -38,13 +48,10 @@ builder.Services.AddRateLimiter(options =>
 });
 
 var app = builder.Build();
-
 app.UseExceptionHandler();
 
-if (app.Environment.IsDevelopment())
-    app.MapOpenApi();
-else
-    app.UseHsts();
+if (app.Environment.IsDevelopment()) app.MapOpenApi();
+else app.UseHsts();
 
 app.Use(async (context, next) =>
 {
