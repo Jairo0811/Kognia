@@ -167,7 +167,7 @@ public static class AuthEndpoints
         await db.SaveChangesAsync();
 
         var roles = await userManager.GetRolesAsync(user);
-        return new AuthResponse(accessToken, refreshToken, expiresAt, user.Id, user.Email ?? string.Empty, roles);
+        return new AuthResponse(accessToken, refreshToken, expiresAt, user.Id, user.Email ?? string.Empty, roles.ToArray());
     }
 
     public sealed class AuthEndpointMarker;
