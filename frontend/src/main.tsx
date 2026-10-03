@@ -6,6 +6,7 @@ import { Portal } from './portal';
 import './accessibility.css';
 import './kognia-ui.css';
 import './kognia-overrides.css';
+import './kognia-home-sections.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
