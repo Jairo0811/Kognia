@@ -42,6 +42,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await IdentitySeeder.SeedAsync(roleManager);
     await CatalogSeeder.SeedAsync(db);
+    await BillingSeeder.SeedAsync(db);
 }
 
 app.MapGet("/health", () => Results.Ok(new
@@ -54,6 +55,7 @@ app.MapGet("/health", () => Results.Ok(new
 app.MapAuthEndpoints();
 app.MapCatalogEndpoints();
 app.MapBlock2Endpoints();
+app.MapBlock3Endpoints();
 
 app.Run();
 
