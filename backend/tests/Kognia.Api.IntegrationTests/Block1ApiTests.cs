@@ -4,6 +4,7 @@ using Kognia.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Xunit;
@@ -18,6 +19,7 @@ public sealed class KogniaApiFactory : WebApplicationFactory<Program>
         builder.ConfigureServices(services =>
         {
             services.RemoveAll<DbContextOptions<KogniaDbContext>>();
+            services.RemoveAll<IDbContextOptionsConfiguration<KogniaDbContext>>();
             services.RemoveAll<KogniaDbContext>();
 
             services.AddDbContext<KogniaDbContext>(options =>
