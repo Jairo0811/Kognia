@@ -22,17 +22,19 @@ export function Portal() {
         {isAdmin && <Link to="/admin">Administración</Link>}
       </nav>
     </aside>
-    <Routes>
-      <Route path="/discover" element={<EngagementCatalogPage />} />
-      <Route path="/billing" element={<BillingPage />} />
-      <Route path="/dashboard" element={<StudentDashboardPage />} />
-      <Route path="/analytics" element={<AnalyticsPage />} />
-      <Route path="/instructor/dashboard" element={<InstructorDashboardPage />} />
-      <Route path="/favorites" element={<FavoritesPage />} />
-      <Route path="/notifications" element={<NotificationsPage />} />
-      <Route path="/courses/:courseId/reviews" element={<CourseReviewsPage />} />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/*" element={<App />} />
-    </Routes>
+    <div id="main-content" tabIndex={-1}>
+      <Routes>
+        <Route path="/discover" element={<EngagementCatalogPage />} />
+        <Route path="/billing" element={<BillingPage />} />
+        <Route path="/dashboard" element={<StudentDashboardPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/instructor/dashboard" element={<InstructorDashboardPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/courses/:courseId/reviews" element={<CourseReviewsPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/*" element={<App />} />
+      </Routes>
+    </div>
   </>;
 }
