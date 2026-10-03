@@ -56,6 +56,7 @@ app.MapAuthEndpoints();
 app.MapCatalogEndpoints();
 app.MapBlock2Endpoints();
 app.MapBlock3Endpoints();
+app.MapBlock4Endpoints();
 
 app.Run();
 
