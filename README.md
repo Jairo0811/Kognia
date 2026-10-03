@@ -66,19 +66,16 @@ La trazabilidad histórica ampliada se encuentra en [`docs/original-unapec-proje
 
 ### 👥 Continuidad por estudiante
 
-**Eliandres Rodriguez Cepeda (A00112070)** participó junto a Francis Jairo Matias Rosario en **Kognia**, correspondiente a **Gestión de Sitios Web (ISO-700)** durante **Mayo - Agosto 2024**. Posteriormente, ambos vuelven a coincidir durante **Septiembre - Diciembre 2026** en dos proyectos distintos y paralelos de **Integración de Aplicaciones con Tecnología Open Source (ISO-815)**: el **track ISO-815** de [**SOAForge**](https://github.com/Jairo0811/SOA-Forge) y [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft). **Esta referencia a SOAForge corresponde únicamente a ISO-815; Eliandres no forma parte de ISO-810.**
+**Eliandres Rodriguez Cepeda (A00112070)** participó junto a Francis Jairo Matias Rosario en **Kognia**, correspondiente a **Gestión de Sitios Web (ISO-700)** durante **Mayo - Agosto 2024**. Posteriormente, ambos vuelven a coincidir en [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft), proyecto de **Integración de Aplicaciones con Tecnología Open Source (ISO-815)** durante **Septiembre - Diciembre 2026**.
 
 | Orden | Asignatura | Proyecto | Período |
 |---:|---|---|---|
 | 1 | Gestión de Sitios Web (ISO-700) | **Kognia** | Mayo - Agosto 2024 |
-| 2 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**SOAForge — track ISO-815**](https://github.com/Jairo0811/SOA-Forge) | Septiembre - Diciembre 2026 |
-| 3 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft) | Septiembre - Diciembre 2026 |
+| 2 | Integración de Aplicaciones con Tecnología Open Source (ISO-815) | [**BonitaSoft**](https://github.com/Jairo0811/BonitaSoft) | Septiembre - Diciembre 2026 |
 
-Las filas 2 y 3 pertenecen al **mismo período** y representan proyectos académicos paralelos, no una secuencia entre SOAForge y BonitaSoft. La continuidad queda respaldada por la coincidencia verificable de **nombre completo y matrícula**.
+La continuidad queda respaldada por la coincidencia verificable de **nombre completo y matrícula**. Kognia y BonitaSoft son proyectos independientes y no existe dependencia técnica entre ellos.
 
-> **Alcance de Eliandres:** en 2026 participa exclusivamente en **ISO-815**, tanto en **SOAForge — track ISO-815** como en **BonitaSoft**. **Eliandres Rodriguez Cepeda no participa ni pertenece al equipo de ISO-810.**
-
-Los tres proyectos son independientes y no existe dependencia técnica entre ellos.
+> **Alcance de Eliandres:** en 2026 participa en **BonitaSoft (ISO-815)**. **No forma parte de SOAForge, porque SOAForge corresponde a Integración de Aplicaciones con Tecnología Propietaria (ISO-810).**
 
 ---
 
