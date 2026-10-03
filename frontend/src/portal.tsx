@@ -2,6 +2,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import { App } from './App';
 import { BillingPage, InstructorDashboardPage, StudentDashboardPage } from './block3';
 import { AdminPage, CourseReviewsPage, FavoritesPage, NotificationsPage } from './block4';
+import { EngagementCatalogPage } from './engagementCatalog';
 import { getSession } from './lib/api';
 
 export function Portal() {
@@ -12,6 +13,7 @@ export function Portal() {
   return <>
     <aside aria-label="Accesos de cuenta">
       <nav>
+        <Link to="/discover">Descubrir</Link>{' '}
         <Link to="/billing">Planes</Link>{' '}
         {session && <><Link to="/dashboard">Dashboard</Link>{' '}<Link to="/favorites">Favoritos</Link>{' '}<Link to="/notifications">Notificaciones</Link>{' '}</>}
         {isInstructor && <><Link to="/instructor/dashboard">Métricas instructor</Link>{' '}</>}
@@ -19,6 +21,7 @@ export function Portal() {
       </nav>
     </aside>
     <Routes>
+      <Route path="/discover" element={<EngagementCatalogPage />} />
       <Route path="/billing" element={<BillingPage />} />
       <Route path="/dashboard" element={<StudentDashboardPage />} />
       <Route path="/instructor/dashboard" element={<InstructorDashboardPage />} />
