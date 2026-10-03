@@ -11,6 +11,7 @@ function JsonMetrics({ data }: { data: Analytics }) {
 
 export function AnalyticsPage() {
   const session = getSession();
+  const token = session?.accessToken;
   const [student, setStudent] = useState<Analytics | null>(null);
   const [instructor, setInstructor] = useState<Analytics | null>(null);
   const [admin, setAdmin] = useState<Analytics | null>(null);
@@ -19,18 +20,18 @@ export function AnalyticsPage() {
   const isAdmin = session?.roles.includes('Administrator') ?? false;
 
   useEffect(() => {
-    if (!session) return;
+    if (!token) return;
     Promise.all([
       api<Analytics>('/api/analytics/student'),
       isInstructor ? api<Analytics>('/api/analytics/instructor') : Promise.resolve(null),
       isAdmin ? api<Analytics>('/api/analytics/admin') : Promise.resolve(null),
     ]).then(([s, i, a]) => { setStudent(s); setInstructor(i); setAdmin(a); })
       .catch(() => setError('No fue posible cargar las analíticas.'));
-  }, [isAdmin, isInstructor]);
+  }, [token, isAdmin, isInstructor]);
 
   if (!session) return <Navigate to="/login" replace />;
 
-  return <main id="main-content" tabIndex={-1}>
+  return <main>
     <p><Link to="/">← Inicio</Link></p>
     <h1>Analíticas</h1>
     {error && <p role="alert">{error}</p>}
