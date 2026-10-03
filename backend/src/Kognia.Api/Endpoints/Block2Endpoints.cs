@@ -23,6 +23,8 @@ public static class Block2Endpoints
 
         var instructor = app.MapGroup("/api/instructor").WithTags("Assessments")
             .RequireAuthorization(policy => policy.RequireRole("Instructor", "Administrator"));
+        instructor.MapGet("/courses/{courseId:guid}/quizzes", GetInstructorQuizzesAsync);
+        instructor.MapGet("/quizzes/{quizId:guid}", GetInstructorQuizAsync);
         instructor.MapPost("/courses/{courseId:guid}/quizzes", CreateQuizAsync);
         instructor.MapPost("/quizzes/{quizId:guid}/questions", AddQuestionAsync);
         instructor.MapPost("/quizzes/{quizId:guid}/publish", PublishQuizAsync);
@@ -169,7 +171,13 @@ public static class Block2Endpoints
                 Passed = x.Attempts.Any(a => a.StudentUserId == userId && a.Passed)
             }).ToListAsync();
 
-        return Results.Ok(new { course, enrollment = new { enrollment.Id, enrollment.Status, enrollment.EnrolledAtUtc, enrollment.CompletedAtUtc }, progress, quizzes });
+        return Results.Ok(new
+        {
+            course,
+            enrollment = new { enrollment.Id, enrollment.Status, enrollment.EnrolledAtUtc, enrollment.CompletedAtUtc },
+            progress,
+            quizzes
+        });
     }
 
     private static async Task<IResult> UpdateLessonProgressAsync(
@@ -301,7 +309,9 @@ public static class Block2Endpoints
         foreach (var question in quiz.Questions)
         {
             submitted.TryGetValue(question.Id, out var selectedOptionId);
-            var selected = question.Options.SingleOrDefault(x => x.Id == selectedOptionId);
+            var selected = selectedOptionId.HasValue
+                ? question.Options.SingleOrDefault(x => x.Id == selectedOptionId.Value)
+                : null;
             var isCorrect = selected?.IsCorrect == true;
             if (isCorrect) correct++;
 
@@ -330,6 +340,56 @@ public static class Block2Endpoints
             attempt.SubmittedAtUtc,
             certificate = certificate is null ? null : new { certificate.Id, certificate.VerificationCode, certificate.IssuedAtUtc }
         });
+    }
+
+    private static async Task<IResult> GetInstructorQuizzesAsync(
+        Guid courseId,
+        ClaimsPrincipal principal,
+        KogniaDbContext db)
+    {
+        var course = await db.Courses.AsNoTracking().SingleOrDefaultAsync(x => x.Id == courseId);
+        if (course is null) return Results.NotFound();
+        if (!CanManage(principal, course)) return Results.Forbid();
+
+        var quizzes = await db.Quizzes.AsNoTracking()
+            .Where(x => x.CourseId == courseId)
+            .OrderBy(x => x.CreatedAtUtc)
+            .Select(x => new
+            {
+                x.Id,
+                x.Title,
+                x.PassingScorePercent,
+                x.IsPublished,
+                Questions = x.Questions.Count,
+                Attempts = x.Attempts.Count
+            }).ToListAsync();
+        return Results.Ok(quizzes);
+    }
+
+    private static async Task<IResult> GetInstructorQuizAsync(Guid quizId, ClaimsPrincipal principal, KogniaDbContext db)
+    {
+        var quiz = await db.Quizzes.AsNoTracking()
+            .Where(x => x.Id == quizId)
+            .Select(x => new
+            {
+                x.Id,
+                x.CourseId,
+                x.Title,
+                x.PassingScorePercent,
+                x.IsPublished,
+                InstructorUserId = x.Course.InstructorUserId,
+                Questions = x.Questions.OrderBy(q => q.Position).Select(q => new
+                {
+                    q.Id,
+                    q.Text,
+                    q.Position,
+                    Options = q.Options.OrderBy(o => o.Position).Select(o => new { o.Id, o.Text, o.IsCorrect, o.Position })
+                })
+            }).SingleOrDefaultAsync();
+        if (quiz is null) return Results.NotFound();
+        if (!principal.IsInRole("Administrator") && quiz.InstructorUserId != GetUserId(principal)) return Results.Forbid();
+
+        return Results.Ok(quiz);
     }
 
     private static async Task<IResult> CreateQuizAsync(
