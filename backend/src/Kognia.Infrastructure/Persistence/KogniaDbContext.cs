@@ -1,4 +1,5 @@
 using Kognia.Domain.Assessments;
+using Kognia.Domain.Billing;
 using Kognia.Domain.Catalog;
 using Kognia.Domain.Certificates;
 using Kognia.Domain.Learning;
@@ -24,6 +25,10 @@ public sealed class KogniaDbContext(DbContextOptions<KogniaDbContext> options)
     public DbSet<QuizAttempt> QuizAttempts => Set<QuizAttempt>();
     public DbSet<QuizAnswer> QuizAnswers => Set<QuizAnswer>();
     public DbSet<Certificate> Certificates => Set<Certificate>();
+    public DbSet<SubscriptionPlan> SubscriptionPlans => Set<SubscriptionPlan>();
+    public DbSet<Subscription> Subscriptions => Set<Subscription>();
+    public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<Invoice> Invoices => Set<Invoice>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -171,6 +176,59 @@ public sealed class KogniaDbContext(DbContextOptions<KogniaDbContext> options)
                 .WithMany()
                 .HasForeignKey(x => x.CourseId)
                 .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<SubscriptionPlan>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.Code).HasMaxLength(50).IsRequired();
+            entity.Property(x => x.Name).HasMaxLength(120).IsRequired();
+            entity.Property(x => x.Currency).HasMaxLength(3).IsRequired();
+            entity.Property(x => x.PriceAmount).HasPrecision(12, 2);
+            entity.HasIndex(x => x.Code).IsUnique();
+        });
+
+        modelBuilder.Entity<Subscription>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.UserId).HasMaxLength(450).IsRequired();
+            entity.Property(x => x.Provider).HasMaxLength(40).IsRequired();
+            entity.Property(x => x.ProviderSubscriptionId).HasMaxLength(120);
+            entity.HasIndex(x => new { x.UserId, x.Status });
+            entity.HasOne(x => x.Plan)
+                .WithMany(x => x.Subscriptions)
+                .HasForeignKey(x => x.PlanId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.UserId).HasMaxLength(450).IsRequired();
+            entity.Property(x => x.Currency).HasMaxLength(3).IsRequired();
+            entity.Property(x => x.Provider).HasMaxLength(40).IsRequired();
+            entity.Property(x => x.ProviderPaymentId).HasMaxLength(120);
+            entity.Property(x => x.CheckoutToken).HasMaxLength(80).IsRequired();
+            entity.Property(x => x.Amount).HasPrecision(12, 2);
+            entity.HasIndex(x => x.CheckoutToken).IsUnique();
+            entity.HasOne(x => x.Subscription)
+                .WithMany(x => x.Payments)
+                .HasForeignKey(x => x.SubscriptionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Invoice>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.UserId).HasMaxLength(450).IsRequired();
+            entity.Property(x => x.Number).HasMaxLength(60).IsRequired();
+            entity.Property(x => x.Currency).HasMaxLength(3).IsRequired();
+            entity.Property(x => x.Amount).HasPrecision(12, 2);
+            entity.HasIndex(x => x.Number).IsUnique();
+            entity.HasOne(x => x.Subscription)
+                .WithMany(x => x.Invoices)
+                .HasForeignKey(x => x.SubscriptionId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }
