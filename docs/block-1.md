@@ -35,6 +35,7 @@ Implemented baseline:
 
 - Instructor/Administrator authorization policy
 - Instructor course list
+- Instructor course editor detail endpoint with sections and lessons
 - Create and edit course metadata
 - Create sections and lessons
 - Publish validation requiring at least one section and lesson
@@ -42,12 +43,22 @@ Implemented baseline:
 - Instructor ownership enforcement
 - Basic frontend instructor workspace for course creation and listing
 
+## Validation completed
+
+- API integration test project added to the solution
+- Identity registration smoke test
+- Public catalog/category smoke test
+- Instructor authorization smoke test
+- Health endpoint smoke test
+- Backend restore/build/test validated in GitHub Actions
+- Frontend install/lint/build validated in GitHub Actions
+- CI run #68 completed successfully
+
 ## Remaining hardening before Block 1 closure
 
 - Generate and validate the EF Core migration containing Identity + catalog schema
-- Add API integration tests for identity, catalog and instructor authorization
-- Expand frontend instructor editing for sections and lessons
-- Validate CI and resolve any compile/lint/test regressions
+- Expand frontend instructor editing UI for sections and lessons
 - Replace development token logging with an email delivery abstraction before production
+- Review NuGet security warnings surfaced by CI as part of security hardening
 
-Block 1 must not be promoted to `dev` until CI is green and the remaining hardening items required for closure are resolved.
+Block 1 must not be promoted to `dev` until the schema migration and instructor editing UI required for closure are resolved. Email delivery and dependency-security remediation remain mandatory before production release.
