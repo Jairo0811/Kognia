@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   update-readme:
-    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +22,6 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
           path = Path('README.md')
           text = path.read_text(encoding='utf-8')
           start = text.index('## 🧭 Continuidad académica')
@@ -56,5 +54,3 @@ La continuidad queda respaldada por la coincidencia verificable de **nombre comp
           git diff --cached --quiet && exit 0
           git commit -m "docs: correct SOAForge as ISO-810"
           git push origin HEAD:docs/fix-soaforge-iso810
-
-# retry
