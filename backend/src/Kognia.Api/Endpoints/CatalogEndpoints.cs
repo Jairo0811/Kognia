@@ -18,6 +18,7 @@ public static class CatalogEndpoints
             .RequireAuthorization(policy => policy.RequireRole("Instructor", "Administrator"));
 
         instructor.MapGet("/courses", GetInstructorCoursesAsync);
+        instructor.MapGet("/courses/{id:guid}", GetInstructorCourseAsync);
         instructor.MapPost("/courses", CreateCourseAsync);
         instructor.MapPut("/courses/{id:guid}", UpdateCourseAsync);
         instructor.MapPost("/courses/{id:guid}/publish", PublishCourseAsync);
@@ -105,6 +106,46 @@ public static class CatalogEndpoints
             .ToListAsync());
     }
 
+    private static async Task<IResult> GetInstructorCourseAsync(Guid id, ClaimsPrincipal principal, KogniaDbContext db)
+    {
+        var course = await db.Courses.AsNoTracking()
+            .Where(x => x.Id == id)
+            .Select(x => new
+            {
+                x.Id,
+                x.Title,
+                x.Slug,
+                x.Summary,
+                x.Description,
+                x.Level,
+                x.CategoryId,
+                x.Status,
+                x.InstructorUserId,
+                Sections = x.Sections.OrderBy(s => s.Position).Select(s => new
+                {
+                    s.Id,
+                    s.Title,
+                    s.Position,
+                    Lessons = s.Lessons.OrderBy(l => l.Position).Select(l => new
+                    {
+                        l.Id,
+                        l.Title,
+                        l.LessonType,
+                        l.Content,
+                        l.VideoUrl,
+                        l.Position,
+                        l.IsPreview
+                    })
+                })
+            }).SingleOrDefaultAsync();
+
+        if (course is null) return Results.NotFound();
+        if (!principal.IsInRole("Administrator") && course.InstructorUserId != principal.FindFirstValue(ClaimTypes.NameIdentifier))
+            return Results.Forbid();
+
+        return Results.Ok(course);
+    }
+
     private static async Task<IResult> CreateCourseAsync(CreateCourseRequest request, ClaimsPrincipal principal, KogniaDbContext db)
     {
         var userId = principal.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -170,7 +211,7 @@ public static class CatalogEndpoints
         var section = new CourseSection { CourseId = courseId, Title = request.Title.Trim(), Position = request.Position };
         db.CourseSections.Add(section);
         await db.SaveChangesAsync();
-        return Results.Created($"/api/instructor/sections/{section.Id}", section);
+        return Results.Created($"/api/instructor/sections/{section.Id}", new { section.Id, section.Title, section.Position });
     }
 
     private static async Task<IResult> AddLessonAsync(Guid sectionId, CreateLessonRequest request, ClaimsPrincipal principal, KogniaDbContext db)
