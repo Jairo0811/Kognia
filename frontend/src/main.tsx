@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Portal } from './portal';
 import './accessibility.css';
 import './kognia-ui.css';
+import './kognia-overrides.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
