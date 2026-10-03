@@ -1,10 +1,10 @@
 # Block 1 — Identity, Course Catalog and Instructor CMS
 
-Block 1 combines the first three functional phases of Kognia.
+Block 1 combines the first three functional phases of Kognia and is functionally complete.
 
 ## Phase 1 — Identity
 
-Implemented baseline:
+Completed:
 
 - ASP.NET Core Identity
 - Student, Instructor and Administrator roles
@@ -18,7 +18,7 @@ Implemented baseline:
 
 ## Phase 2 — Course Catalog
 
-Implemented baseline:
+Completed:
 
 - Category, Course, CourseSection and Lesson domain models
 - Public category endpoint
@@ -31,34 +31,54 @@ Implemented baseline:
 
 ## Phase 3 — Instructor CMS
 
-Implemented baseline:
+Completed:
 
 - Instructor/Administrator authorization policy
 - Instructor course list
-- Instructor course editor detail endpoint with sections and lessons
-- Create and edit course metadata
+- Instructor course detail endpoint with sections and lessons
+- Create and edit course metadata endpoints
 - Create sections and lessons
-- Publish validation requiring at least one section and lesson
+- Frontend content editor for sections and lessons
 - Draft/published lifecycle
+- Publish validation requiring at least one section and one lesson
 - Instructor ownership enforcement
-- Basic frontend instructor workspace for course creation and listing
 
-## Validation completed
+## Persistence
 
-- API integration test project added to the solution
-- Identity registration smoke test
-- Public catalog/category smoke test
-- Instructor authorization smoke test
-- Health endpoint smoke test
-- Backend restore/build/test validated in GitHub Actions
-- Frontend install/lint/build validated in GitHub Actions
-- CI run #68 completed successfully
+Completed:
 
-## Remaining hardening before Block 1 closure
+- Initial EF Core migration for ASP.NET Core Identity, refresh tokens and course catalog schema
+- SQL Server schema startup now uses `Database.MigrateAsync()` outside the integration-test environment
+- Integration tests continue to use the EF Core InMemory provider with `EnsureCreatedAsync()`
+- Identity roles and initial catalog categories are seeded after database initialization
 
-- Generate and validate the EF Core migration containing Identity + catalog schema
-- Expand frontend instructor editing UI for sections and lessons
-- Replace development token logging with an email delivery abstraction before production
-- Review NuGet security warnings surfaced by CI as part of security hardening
+## Validation
 
-Block 1 must not be promoted to `dev` until the schema migration and instructor editing UI required for closure are resolved. Email delivery and dependency-security remediation remain mandatory before production release.
+Completed through GitHub Actions:
+
+- Backend restore
+- Backend build
+- Architecture tests
+- API integration tests
+- Frontend install
+- Frontend lint
+- Frontend production build
+
+Integration coverage includes:
+
+- Health endpoint
+- Student registration
+- Public categories/catalog access
+- Instructor endpoint authentication requirement
+
+## Deferred release hardening
+
+The following items are intentionally assigned to later hardening phases rather than Block 1 functional scope:
+
+- Replace development confirmation/reset-token logging with a production email-delivery provider
+- Remediate dependency security advisories reported by NuGet audit
+- Add broader end-to-end browser coverage and production observability
+
+## Status
+
+**Block 1 complete — Phases 1, 2 and 3 are ready for integration into `dev` once the final CI run for this branch is green.**
