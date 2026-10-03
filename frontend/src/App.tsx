@@ -25,6 +25,30 @@ type InstructorCourse = {
   categoryId: string;
 };
 
+type InstructorLesson = {
+  id: string;
+  title: string;
+  lessonType: string;
+  content?: string;
+  videoUrl?: string;
+  position: number;
+  isPreview: boolean;
+};
+
+type InstructorSection = {
+  id: string;
+  title: string;
+  position: number;
+  lessons: InstructorLesson[];
+};
+
+type InstructorCourseDetail = InstructorCourse & {
+  summary: string;
+  description: string;
+  instructorUserId: string;
+  sections: InstructorSection[];
+};
+
 function Layout({ children }: { children: React.ReactNode }) {
   const session = getSession();
   const navigate = useNavigate();
@@ -142,11 +166,13 @@ function RegisterPage() {
 function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+
   async function submit(event: FormEvent) {
     event.preventDefault();
     await api('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) });
     setMessage('Si la cuenta existe, recibirás instrucciones para restablecer la contraseña.');
   }
+
   return (
     <Layout>
       <main>
@@ -196,29 +222,45 @@ function InstructorPage() {
   const session = getSession();
   const [courses, setCourses] = useState<InstructorCourse[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selected, setSelected] = useState<InstructorCourseDetail | null>(null);
   const [form, setForm] = useState({ title: '', slug: '', summary: '', description: '', level: 'Beginner', categoryId: '' });
+  const [sectionTitle, setSectionTitle] = useState('');
   const [message, setMessage] = useState('');
 
   const canManage = session?.roles.some((role) => role === 'Instructor' || role === 'Administrator') ?? false;
 
-  async function load() {
-    const [courseData, categoryData] = await Promise.all([
+  useEffect(() => {
+    if (!canManage) return;
+    Promise.all([
       api<InstructorCourse[]>('/api/instructor/courses'),
       api<Category[]>('/api/catalog/categories'),
-    ]);
-    setCourses(courseData);
-    setCategories(categoryData);
-    if (!form.categoryId && categoryData[0]) setForm((current) => ({ ...current, categoryId: categoryData[0].id }));
-  }
-
-  useEffect(() => {
-    if (canManage) void load();
+    ]).then(([courseData, categoryData]) => {
+      setCourses(courseData);
+      setCategories(categoryData);
+      if (categoryData[0]) {
+        setForm((current) => current.categoryId ? current : { ...current, categoryId: categoryData[0].id });
+      }
+    }).catch(() => setMessage('No fue posible cargar el portal del instructor.'));
   }, [canManage]);
 
   if (!session) return <Navigate to="/login" replace />;
+  if (!canManage) return <Layout><main><h1>Portal del instructor</h1><p>Tu cuenta no tiene el rol de Instructor o Administrator.</p></main></Layout>;
 
-  if (!canManage) {
-    return <Layout><main><h1>Portal del instructor</h1><p>Tu cuenta no tiene el rol de Instructor o Administrator.</p></main></Layout>;
+  async function reloadCourses() {
+    setCourses(await api<InstructorCourse[]>('/api/instructor/courses'));
+  }
+
+  async function openCourse(id: string) {
+    setMessage('');
+    try {
+      setSelected(await api<InstructorCourseDetail>(`/api/instructor/courses/${id}`));
+    } catch {
+      setMessage('No fue posible abrir el curso.');
+    }
+  }
+
+  async function refreshSelected() {
+    if (selected) setSelected(await api<InstructorCourseDetail>(`/api/instructor/courses/${selected.id}`));
   }
 
   async function createCourse(event: FormEvent) {
@@ -228,9 +270,51 @@ function InstructorPage() {
       await api('/api/instructor/courses', { method: 'POST', body: JSON.stringify(form) });
       setMessage('Curso creado como borrador.');
       setForm({ title: '', slug: '', summary: '', description: '', level: 'Beginner', categoryId: categories[0]?.id ?? '' });
-      await load();
+      await reloadCourses();
     } catch {
       setMessage('No fue posible crear el curso.');
+    }
+  }
+
+  async function addSection(event: FormEvent) {
+    event.preventDefault();
+    if (!selected) return;
+    await api(`/api/instructor/courses/${selected.id}/sections`, {
+      method: 'POST',
+      body: JSON.stringify({ title: sectionTitle, position: selected.sections.length + 1 }),
+    });
+    setSectionTitle('');
+    setMessage('Sección agregada.');
+    await refreshSelected();
+  }
+
+  async function addLesson(event: FormEvent<HTMLFormElement>, section: InstructorSection) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    await api(`/api/instructor/sections/${section.id}/lessons`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title: String(data.get('title') ?? ''),
+        lessonType: String(data.get('lessonType') ?? 'Text'),
+        content: String(data.get('content') ?? '') || null,
+        videoUrl: String(data.get('videoUrl') ?? '') || null,
+        position: section.lessons.length + 1,
+        isPreview: data.get('isPreview') === 'on',
+      }),
+    });
+    event.currentTarget.reset();
+    setMessage('Lección agregada.');
+    await refreshSelected();
+  }
+
+  async function publishCourse() {
+    if (!selected) return;
+    try {
+      await api(`/api/instructor/courses/${selected.id}/publish`, { method: 'POST' });
+      setMessage('Curso publicado correctamente.');
+      await Promise.all([refreshSelected(), reloadCourses()]);
+    } catch {
+      setMessage('El curso necesita al menos una sección y una lección antes de publicarse.');
     }
   }
 
@@ -238,6 +322,7 @@ function InstructorPage() {
     <Layout>
       <main>
         <h1>Portal del instructor</h1>
+        {message && <p role="status">{message}</p>}
         <section>
           <h2>Crear curso</h2>
           <form onSubmit={createCourse}>
@@ -249,12 +334,47 @@ function InstructorPage() {
             <label>Categoría<select value={form.categoryId} onChange={(e) => setForm({ ...form, categoryId: e.target.value })} required>{categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
             <button type="submit">Crear borrador</button>
           </form>
-          {message && <p role="status">{message}</p>}
         </section>
+
         <section>
           <h2>Mis cursos</h2>
-          {courses.length === 0 ? <p>No tienes cursos todavía.</p> : <ul>{courses.map((course) => <li key={course.id}>{course.title} — {course.status === 1 ? 'Publicado' : 'Borrador'}</li>)}</ul>}
+          {courses.length === 0 ? <p>No tienes cursos todavía.</p> : (
+            <ul>{courses.map((course) => <li key={course.id}>{course.title} — {course.status === 1 ? 'Publicado' : 'Borrador'} <button type="button" onClick={() => void openCourse(course.id)}>Editar contenido</button></li>)}</ul>
+          )}
         </section>
+
+        {selected && (
+          <section aria-labelledby="course-editor-title">
+            <h2 id="course-editor-title">Editor: {selected.title}</h2>
+            <p>{selected.summary}</p>
+            <p>Estado: {selected.status === 1 ? 'Publicado' : 'Borrador'} · {selected.sections.length} secciones</p>
+            <button type="button" onClick={() => void publishCourse()} disabled={selected.status === 1}>Publicar curso</button>
+
+            <form onSubmit={addSection}>
+              <h3>Nueva sección</h3>
+              <label>Título de la sección<input value={sectionTitle} onChange={(e) => setSectionTitle(e.target.value)} required /></label>
+              <button type="submit">Agregar sección</button>
+            </form>
+
+            {selected.sections.map((section) => (
+              <article key={section.id}>
+                <h3>{section.position}. {section.title}</h3>
+                {section.lessons.length === 0 ? <p>Sin lecciones.</p> : (
+                  <ol>{section.lessons.map((lesson) => <li key={lesson.id}>{lesson.title} · {lesson.lessonType}{lesson.isPreview ? ' · Vista previa' : ''}</li>)}</ol>
+                )}
+                <form onSubmit={(event) => void addLesson(event, section)}>
+                  <h4>Agregar lección</h4>
+                  <label>Título<input name="title" required /></label>
+                  <label>Tipo<select name="lessonType" defaultValue="Text"><option>Text</option><option>Video</option><option>Resource</option></select></label>
+                  <label>Contenido<textarea name="content" /></label>
+                  <label>URL de video<input name="videoUrl" type="url" /></label>
+                  <label><input name="isPreview" type="checkbox" /> Disponible como vista previa</label>
+                  <button type="submit">Agregar lección</button>
+                </form>
+              </article>
+            ))}
+          </section>
+        )}
       </main>
     </Layout>
   );
