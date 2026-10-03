@@ -7,5 +7,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Kognia.ArchitectureTests/Kognia.ArchitectureTests.csproj" />
+    <Project Path="tests/Kognia.Api.IntegrationTests/Kognia.Api.IntegrationTests.csproj" />
   </Folder>
 </Solution>
