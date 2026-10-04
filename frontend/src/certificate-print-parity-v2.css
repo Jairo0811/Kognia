@@ -70,10 +70,32 @@
     font-size: 8.8pt !important;
   }
 
+  /* Center the academic metadata around the exact horizontal midpoint.
+     The divider is the anchor: professor balances to its left and period to its right. */
   .certificate-v3-meta {
-    width: 170mm !important;
-    gap: 11mm !important;
-    margin-top: 3.2mm !important;
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) 1px minmax(0,1fr) !important;
+    width: 152mm !important;
+    gap: 8mm !important;
+    margin: 3.2mm auto 0 !important;
+    justify-self: center !important;
+    align-self: center !important;
+  }
+
+  .certificate-v3-meta-item {
+    min-width: 0 !important;
+  }
+
+  .certificate-v3-meta-item:first-child {
+    justify-content: flex-end !important;
+  }
+
+  .certificate-v3-meta-item:last-child {
+    justify-content: flex-start !important;
+  }
+
+  .certificate-v3-meta-divider {
+    justify-self: center !important;
   }
 
   .certificate-v3-meta-icon {
