@@ -1,5 +1,25 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft,
+  faAward,
+  faBookOpen,
+  faBookOpenReader,
+  faCalendarDays,
+  faCertificate,
+  faCircleCheck,
+  faCopy,
+  faEye,
+  faGaugeHigh,
+  faGraduationCap,
+  faPrint,
+  faShareNodes,
+  faShieldHalved,
+  faSpinner,
+  faTriangleExclamation,
+  faUserTie,
+} from '@fortawesome/free-solid-svg-icons';
 import { api, getSession } from './lib/api';
 import './certificate-document-v3.css';
 
@@ -76,9 +96,18 @@ function CertificateV3Nav() {
         <img src="/branding/kognia-logo.png" alt="Kognia" />
       </Link>
       <div>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/my-learning">Mi aprendizaje</Link>
-        <Link className="is-active" to="/certificates">Certificados</Link>
+        <Link to="/dashboard">
+          <FontAwesomeIcon icon={faGaugeHigh} />
+          <span>Dashboard</span>
+        </Link>
+        <Link to="/my-learning">
+          <FontAwesomeIcon icon={faBookOpenReader} />
+          <span>Mi aprendizaje</span>
+        </Link>
+        <Link className="is-active" to="/certificates">
+          <FontAwesomeIcon icon={faCertificate} />
+          <span>Certificados</span>
+        </Link>
       </div>
     </nav>
   );
@@ -111,17 +140,30 @@ function CertificateV3Toolbar({ document }: { document: CertificateDocument }) {
 
   return (
     <div className="certificate-v3-toolbar no-print">
-      <div>
+      <div className="certificate-v3-toolbar-info">
         <span className={`certificate-v3-status ${document.source === 'issued' ? 'is-valid' : 'is-preview'}`}>
-          <i />
+          <FontAwesomeIcon icon={document.source === 'issued' ? faCircleCheck : faEye} />
           {document.source === 'issued' ? 'Certificado emitido' : 'Vista previa académica'}
         </span>
-        <p>Código <strong>{document.verificationCode}</strong></p>
+        <p>
+          <FontAwesomeIcon icon={faShieldHalved} />
+          <span>Código</span>
+          <strong>{document.verificationCode}</strong>
+        </p>
       </div>
       <div className="certificate-v3-toolbar-actions">
-        <button type="button" onClick={() => void copyVerification()}>{copied ? 'Copiado ✓' : 'Copiar código'}</button>
-        <button type="button" onClick={() => void shareCertificate()}>Compartir</button>
-        <button className="certificate-v3-primary" type="button" onClick={() => window.print()}>Imprimir / PDF</button>
+        <button type="button" onClick={() => void copyVerification()}>
+          <FontAwesomeIcon icon={copied ? faCircleCheck : faCopy} />
+          <span>{copied ? 'Copiado' : 'Copiar código'}</span>
+        </button>
+        <button type="button" onClick={() => void shareCertificate()}>
+          <FontAwesomeIcon icon={faShareNodes} />
+          <span>Compartir</span>
+        </button>
+        <button className="certificate-v3-primary" type="button" onClick={() => window.print()}>
+          <FontAwesomeIcon icon={faPrint} />
+          <span>Imprimir / PDF</span>
+        </button>
       </div>
     </div>
   );
@@ -140,7 +182,7 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
 
       <header className="certificate-v3-header">
         <p className="certificate-v3-corner-copy copy-left">CONOCIMIENTO<br />QUE CONECTA<br />OPORTUNIDADES</p>
-        <img className="certificate-v3-logo" src="/branding/kognia-logo.png" alt="Kognia — Learn, Connect, Grow" />
+        <img className="certificate-v3-logo" src="/branding/kognia-logo2.png" alt="Kognia — Learn, Connect, Grow" />
         <p className="certificate-v3-corner-copy copy-right">EDUCACIÓN<br />PARA UN<br />FUTURO REAL</p>
       </header>
 
@@ -153,14 +195,14 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
         <p className="certificate-v3-awarded">Otorgado por haber completado satisfactoriamente la materia</p>
 
         <div className="certificate-v3-course-ribbon">
-          <span aria-hidden="true">◇</span>
+          <FontAwesomeIcon className="certificate-v3-ribbon-icon" icon={faBookOpen} aria-hidden="true" />
           <strong>{document.courseTitle}</strong>
-          <span aria-hidden="true">◇</span>
+          <FontAwesomeIcon className="certificate-v3-ribbon-icon" icon={faBookOpen} aria-hidden="true" />
         </div>
 
         <div className="certificate-v3-presented">
           <i aria-hidden="true" />
-          <span>PRESENTADO A</span>
+          <span><FontAwesomeIcon icon={faGraduationCap} aria-hidden="true" /> PRESENTADO A</span>
           <i aria-hidden="true" />
         </div>
 
@@ -172,18 +214,19 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
 
         <div className="certificate-v3-meta">
           <div className="certificate-v3-meta-item">
-            <span className="certificate-v3-meta-icon" aria-hidden="true">♙</span>
+            <span className="certificate-v3-meta-icon" aria-hidden="true"><FontAwesomeIcon icon={faUserTie} /></span>
             <p><strong>Profesor:</strong><br />{document.professor ?? 'Equipo académico Kognia'}</p>
           </div>
           <div className="certificate-v3-meta-divider" aria-hidden="true" />
           <div className="certificate-v3-meta-item">
-            <span className="certificate-v3-meta-icon" aria-hidden="true">▣</span>
+            <span className="certificate-v3-meta-icon" aria-hidden="true"><FontAwesomeIcon icon={faCalendarDays} /></span>
             <p><strong>Periodo académico:</strong><br />{document.academicPeriod ?? formatDate(document.issuedAtUtc)}</p>
           </div>
         </div>
 
         <p className="certificate-v3-recognition">
-          En reconocimiento a su dedicación, esfuerzo y culminación exitosa de la asignatura.
+          <FontAwesomeIcon icon={faAward} aria-hidden="true" />
+          <span>En reconocimiento a su dedicación, esfuerzo y culminación exitosa de la asignatura.</span>
         </p>
       </section>
 
@@ -219,6 +262,7 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
       </footer>
 
       <div className="certificate-v3-code">
+        <FontAwesomeIcon icon={faShieldHalved} aria-hidden="true" />
         <span>Código:</span>
         <strong>{document.verificationCode}</strong>
       </div>
@@ -254,15 +298,15 @@ export function CertificateDetailPageV3() {
     <>
       <CertificateV3Nav />
       <main className="certificate-v3-shell">
-        <div className="certificate-v3-back no-print"><Link to="/certificates">← Volver a mis certificados</Link></div>
+        <div className="certificate-v3-back no-print"><Link to="/certificates"><FontAwesomeIcon icon={faArrowLeft} /> <span>Volver a mis certificados</span></Link></div>
         {invalid ? (
           <section className="certificate-v3-invalid">
-            <span>!</span>
+            <span className="certificate-v3-state-icon"><FontAwesomeIcon icon={faTriangleExclamation} /></span>
             <h1>Certificado no encontrado</h1>
             <p>El código indicado no corresponde a una credencial válida de Kognia.</p>
           </section>
         ) : !document ? (
-          <section className="certificate-v3-loading">Preparando certificado...</section>
+          <section className="certificate-v3-loading"><FontAwesomeIcon icon={faSpinner} spin /> <span>Preparando certificado...</span></section>
         ) : (
           <>
             <CertificateV3Toolbar document={document} />
@@ -284,7 +328,7 @@ export function AcademicCertificatePreviewPageV3() {
     <>
       <CertificateV3Nav />
       <main className="certificate-v3-shell">
-        <div className="certificate-v3-back no-print"><Link to="/certificates">← Volver a certificados</Link></div>
+        <div className="certificate-v3-back no-print"><Link to="/certificates"><FontAwesomeIcon icon={faArrowLeft} /> <span>Volver a certificados</span></Link></div>
         <CertificateV3Toolbar document={document} />
         <CertificateV3Artwork document={document} />
       </main>
