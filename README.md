@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend/public/branding/kognia-logo.png" alt="Kognia" width="720" />
+<img src="frontend/public/branding/kognia-portada.png" alt="Kognia" width="720" />
 
 <br/>
 
