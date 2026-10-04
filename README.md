@@ -1,10 +1,10 @@
-<<<<<<< HEAD
+
 <p align="center">
   <img src="docs/images/kognia-logo.png" alt="Logo de TestGraph" width="720" />
 </p>
-=======
+
 <div align="center">
->>>>>>> ad42e1d0b98aba2539ee5f190249b75a0f6f903d
+
 
 <img src="frontend/public/branding/kognia-portada.png" alt="Kognia" width="720" />
 
