@@ -1,0 +1,177 @@
+/* Print parity V2 — force the PDF to match the approved browser preview more closely. */
+
+@media print {
+  /* Decorative copy is intentionally visible in print. Earlier responsive rules
+     can hide these elements depending on Chromium's print viewport. */
+  .certificate-v3-corner-copy {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #5875bd !important;
+    font-size: 5.4pt !important;
+    line-height: 1.5 !important;
+    letter-spacing: 2.25pt !important;
+  }
+
+  .certificate-v3-microcopy {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #5875bd !important;
+    font-size: 4.5pt !important;
+    line-height: 1.5 !important;
+    letter-spacing: 1.85pt !important;
+  }
+
+  /* The browser preview has a stronger typographic hierarchy than Chromium's
+     first print pass. Scale the key academic content back up. */
+  .certificate-v3-title-row h1 {
+    font-size: 40pt !important;
+    line-height: .96 !important;
+    letter-spacing: -1.05pt !important;
+  }
+
+  .certificate-v3-title-row > span {
+    width: 30mm !important;
+  }
+
+  .certificate-v3-awarded {
+    margin: 2.5mm 0 3mm !important;
+    font-size: 11.5pt !important;
+  }
+
+  .certificate-v3-course-ribbon {
+    width: 218mm !important;
+    padding: 3mm 8.5mm !important;
+  }
+
+  .certificate-v3-course-ribbon strong {
+    font-size: 30pt !important;
+    line-height: 1 !important;
+  }
+
+  .certificate-v3-presented {
+    margin-top: 3.5mm !important;
+    font-size: 6.2pt !important;
+  }
+
+  .certificate-v3-recipient {
+    margin: 1.8mm 0 1mm !important;
+    font-size: 44pt !important;
+    line-height: .97 !important;
+  }
+
+  .certificate-v3-student-id {
+    font-size: 10.5pt !important;
+  }
+
+  .certificate-v3-project-note {
+    margin-top: 1.9mm !important;
+    font-size: 8.8pt !important;
+  }
+
+  .certificate-v3-meta {
+    width: 170mm !important;
+    gap: 11mm !important;
+    margin-top: 3.2mm !important;
+  }
+
+  .certificate-v3-meta-icon {
+    width: 8.6mm !important;
+    height: 8.6mm !important;
+    flex-basis: 8.6mm !important;
+  }
+
+  .certificate-v3-meta-item p {
+    font-size: 8.2pt !important;
+  }
+
+  .certificate-v3-meta-item strong {
+    font-size: 8.9pt !important;
+  }
+
+  .certificate-v3-recognition {
+    margin-top: 3mm !important;
+    font-size: 8.6pt !important;
+  }
+
+  /* Match the broad, symmetrical footer seen in the browser preview. */
+  .certificate-v3-footer {
+    grid-template-columns: 80mm 34mm 80mm !important;
+    grid-template-areas: 'professor seal platform' !important;
+    column-gap: 10mm !important;
+    width: 224mm !important;
+    padding: 6mm 0 8.5mm !important;
+  }
+
+  .certificate-v3-signature {
+    width: 80mm !important;
+    min-width: 80mm !important;
+    padding: 0 5mm !important;
+  }
+
+  .certificate-v3-signature-script {
+    width: 70mm !important;
+    min-height: 8.5mm !important;
+    font-size: 15pt !important;
+  }
+
+  .certificate-v3-signature i {
+    width: 68mm !important;
+    max-width: 68mm !important;
+    margin: 1.6mm auto 1.9mm !important;
+  }
+
+  .certificate-v3-signature strong {
+    font-size: 8.1pt !important;
+  }
+
+  .certificate-v3-signature small {
+    font-size: 5.4pt !important;
+    letter-spacing: .95pt !important;
+  }
+
+  .certificate-v3-seal {
+    width: 34mm !important;
+  }
+
+  .certificate-v3-seal-core {
+    width: 31mm !important;
+    height: 31mm !important;
+  }
+
+  .certificate-v3-seal-stars {
+    font-size: 5pt !important;
+  }
+
+  .certificate-v3-microcopy.micro-left {
+    left: -27mm !important;
+    bottom: 9mm !important;
+  }
+
+  .certificate-v3-microcopy.micro-right {
+    right: -27mm !important;
+    bottom: 9mm !important;
+  }
+
+  /* Prevent older rules from centering or stretching the verification code. */
+  .certificate-v3-code {
+    position: absolute !important;
+    display: flex !important;
+    visibility: visible !important;
+    left: auto !important;
+    top: auto !important;
+    right: 12mm !important;
+    bottom: 4.5mm !important;
+    width: auto !important;
+    max-width: none !important;
+    justify-content: flex-end !important;
+    padding: .8mm 1.8mm !important;
+    background: #ffffffee !important;
+    font-size: 5.3pt !important;
+  }
+
+  .certificate-v3-code strong {
+    font-size: 5.5pt !important;
+  }
+}
