@@ -202,7 +202,7 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
         <div className="certificate-v3-seal" aria-label="Sello oficial Kognia">
           <span className="certificate-v3-seal-stars">✦ KOGNIA ✦</span>
           <div className="certificate-v3-seal-core">
-            <img src="/branding/kognia-isotipo.png" alt="" aria-hidden="true" />
+            <img className="certificate-v3-seal-official-logo" src="/branding/kognia-logo.png" alt="" aria-hidden="true" />
           </div>
         </div>
 
