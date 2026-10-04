@@ -58,9 +58,9 @@ El producto actual es una reconstrucción completa del concepto académico origi
 
 | 👤 Integrante | 🆔 Matrícula |
 |---|---|
-| 👨🏻‍💻 Francis Jairo Matias Rosario | A00115261 |
-| 👨🏻‍💻 Eliandres Rodriguez Cepeda | A00112070 |
 | 👨🏻‍💻 Ramon Rosario Rodriguez | A00110961 |
+| 👨🏻‍💻 Eliandres Rodriguez Cepeda | A00112070 |
+| 👨🏻‍💻 Francis Jairo Matias Rosario | A00115261 |
 
 La trazabilidad histórica ampliada se conserva en [`docs/original-unapec-project.md`](docs/original-unapec-project.md).
 
