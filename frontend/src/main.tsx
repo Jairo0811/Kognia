@@ -13,6 +13,7 @@ import './certificate-print-fixes.css';
 import './certificate-v2.css';
 import './certificate-copy-fixes.css';
 import './branding-official.css';
+import './certificate-document-v3-fixes.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
