@@ -15,6 +15,7 @@ import './certificate-copy-fixes.css';
 import './branding-official.css';
 import './certificate-document-v3-fixes.css';
 import './certificate-document-v3-final.css';
+import './certificate-print-parity.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
