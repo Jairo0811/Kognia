@@ -1,0 +1,117 @@
+/* Official Kognia brand assets. Keep generated CSS marks out of product surfaces. */
+:root{
+  --kognia-logo:url('/branding/kognia-logo.png');
+  --kognia-isotipo:url('/branding/kognia-isotipo.png');
+}
+
+/* Home: use the complete official lockup. */
+.k-topbar .k-brand{
+  width:190px;
+  height:64px;
+  flex:0 0 190px;
+  display:block;
+  background-image:var(--kognia-logo);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+}
+.k-topbar .k-brand>.k-mark,
+.k-topbar .k-brand>.k-wordmark{display:none!important}
+
+.k-footer .k-brand{
+  width:155px;
+  height:62px;
+  flex:0 0 155px;
+  display:block;
+  background-image:var(--kognia-logo);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+}
+.k-footer .k-brand>.k-mark,
+.k-footer .k-brand>.k-wordmark{display:none!important}
+
+/* Product preview inside the Home. */
+.k-mini-logo{
+  font-size:0!important;
+  border-radius:6px!important;
+  background:transparent var(--kognia-isotipo) center/contain no-repeat!important;
+  box-shadow:none!important;
+}
+
+/* Authenticated sidebar. */
+.account-nav:before{
+  content:'Kognia'!important;
+  box-sizing:border-box;
+  display:flex!important;
+  align-items:center;
+  height:48px!important;
+  margin:0 10px 26px!important;
+  padding:0 0 0 54px!important;
+  background:var(--kognia-isotipo) left center/43px auto no-repeat!important;
+  border-radius:0!important;
+  color:#fff!important;
+  font-size:21px!important;
+  font-weight:850!important;
+  line-height:1!important;
+}
+
+/* Legacy/App navigation brand icon. */
+#main-content>header:not(.k-topbar) nav>a:first-child:before,
+#main-content>nav[aria-label='Navegación de aprendizaje'] a:first-child:before{
+  content:''!important;
+  width:40px!important;
+  height:40px!important;
+  margin-right:10px!important;
+  border-radius:0!important;
+  background:transparent var(--kognia-isotipo) center/contain no-repeat!important;
+  box-shadow:none!important;
+}
+
+/* Certificate navigation and credential surfaces. */
+.certificate-brand-mark{
+  font-size:0!important;
+  background:transparent var(--kognia-isotipo) center/contain no-repeat!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+.certificate-logo-mark{
+  transform:none!important;
+  border-radius:0!important;
+  background:transparent var(--kognia-isotipo) center/contain no-repeat!important;
+  box-shadow:none!important;
+}
+.certificate-logo-mark span{display:none!important}
+
+.certificate-card-seal{
+  font-size:0!important;
+  background:#08265f var(--kognia-isotipo) center/70% auto no-repeat!important;
+}
+
+.certificate-seal-ring span{
+  display:block!important;
+  width:62%!important;
+  height:62%!important;
+  font-size:0!important;
+  background:var(--kognia-isotipo) center/contain no-repeat!important;
+  -webkit-background-clip:initial!important;
+  color:transparent!important;
+}
+
+.certificate-authenticity>span{
+  font-size:0!important;
+  background:linear-gradient(145deg,#25d9ff22,#1778ff22,#693cff22),var(--kognia-isotipo) center/72% auto no-repeat!important;
+}
+
+/* Ensure no old pseudo-generated K remains visible in certificate/legacy cards. */
+main:not(.k-home)>ul>li:has(a[href*='certificates/verify']):before{
+  content:''!important;
+  background:#eef5ff var(--kognia-isotipo) center/70% auto no-repeat!important;
+  color:transparent!important;
+}
+
+@media(max-width:760px){
+  .k-topbar .k-brand{width:142px;height:52px;flex-basis:142px}
+  .k-footer .k-brand{width:132px;height:52px;flex-basis:132px}
+  .account-nav:before{margin-bottom:10px!important}
+}
