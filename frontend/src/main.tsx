@@ -17,6 +17,7 @@ import './certificate-document-v3-fixes.css';
 import './certificate-document-v3-final.css';
 import './certificate-print-parity.css';
 import './certificate-print-parity-v2.css';
+import './certificate-official-seal.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
