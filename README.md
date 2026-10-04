@@ -1,4 +1,6 @@
-# Kognia
+<p align="center">
+  <img src="docs/images/kognia-logo.png" alt="Logo de TestGraph" width="720" />
+</p>
 
 **Kognia** is a modern learning SaaS platform focused on courses, learning paths, assessments, certifications, subscriptions, engagement and measurable learner progress.
 
