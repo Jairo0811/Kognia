@@ -35,7 +35,7 @@ type CertificateDocument = {
 
 const ISO700_PREVIEWS: Record<string, CertificateDocument> = {
   jairo: {
-    studentName: 'Francis Jairo Matias Rosario',
+    studentName: 'Francis Jairo Matías Rosario',
     studentId: 'A00115261',
     courseTitle: 'Gestión de Sitios Web (ISO-700)',
     verificationCode: 'KOG-ISO700-A00115261',
@@ -46,7 +46,7 @@ const ISO700_PREVIEWS: Record<string, CertificateDocument> = {
     source: 'academic-preview',
   },
   eliandres: {
-    studentName: 'Eliandres Rodriguez Cepeda',
+    studentName: 'Eliandres Rodríguez Cepeda',
     studentId: 'A00112070',
     courseTitle: 'Gestión de Sitios Web (ISO-700)',
     verificationCode: 'KOG-ISO700-A00112070',
@@ -57,7 +57,7 @@ const ISO700_PREVIEWS: Record<string, CertificateDocument> = {
     source: 'academic-preview',
   },
   ramon: {
-    studentName: 'Ramon Rosario Rodriguez',
+    studentName: 'Ramón Rosario Rodríguez',
     studentId: 'A00110961',
     courseTitle: 'Gestión de Sitios Web (ISO-700)',
     verificationCode: 'KOG-ISO700-A00110961',
