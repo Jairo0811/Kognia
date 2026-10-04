@@ -1,40 +1,67 @@
 /* Certificate V3 final balancing pass based on printed PDF review. */
 
-/* Use a single real full lockup asset in the document header. */
+/* Official Kognia lockup: real isotype asset + dark wordmark for white paper. */
 .certificate-v3-header{
   position:relative!important;
   grid-template-columns:1fr minmax(300px,380px) 1fr!important;
   align-items:start!important;
   min-height:98px!important;
 }
-.certificate-v3-header:before,
-.certificate-v3-header:after{
-  content:none!important;
-  display:none!important;
-}
 .certificate-v3-logo{
-  content:url('/branding/kognia-logo-certificate.svg')!important;
+  content:normal!important;
   position:static!important;
   inset:auto!important;
   justify-self:center!important;
   align-self:start!important;
   display:block!important;
-  width:100%!important;
+  width:365px!important;
   max-width:365px!important;
   height:92px!important;
   margin:0 auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
+  object-fit:none!important;
+  object-position:9999px 9999px!important;
+  background:transparent url('/branding/kognia-isotipo.png') 18px center/82px auto no-repeat!important;
+}
+.certificate-v3-header:before{
+  content:'Kognia'!important;
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:7px!important;
+  transform:translateX(-20%)!important;
+  z-index:3!important;
+  color:#071b56!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif!important;
+  font-size:47px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  letter-spacing:-2px!important;
+}
+.certificate-v3-header:after{
+  content:'LEARN  •  CONNECT  •  GROW'!important;
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:61px!important;
+  transform:translateX(-3%)!important;
+  z-index:3!important;
+  color:#29417b!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif!important;
+  font-size:8px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:4px!important;
+  white-space:nowrap!important;
 }
 
 /* Keep professor and academic-period metadata on one clean row. */
 .certificate-v3-meta{
   grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
-  width:min(720px,72%)!important;
-  gap:32px!important;
+  width:min(760px,76%)!important;
+  gap:36px!important;
 }
 .certificate-v3-meta-item{min-width:0!important}
-.certificate-v3-meta-item p{white-space:normal!important}
+.certificate-v3-meta-item p{white-space:nowrap!important}
 
 /* Footer must be three balanced zones. Microcopy becomes decorative and absolute. */
 .certificate-v3-footer{
@@ -46,11 +73,11 @@
   column-gap:72px!important;
   width:min(1060px,86%)!important;
   margin:auto auto 0!important;
-  padding:46px 0 34px!important;
+  padding:46px 0 40px!important;
 }
 .certificate-v3-microcopy{
   position:absolute!important;
-  bottom:32px!important;
+  bottom:36px!important;
   width:110px!important;
   pointer-events:none!important;
 }
@@ -92,17 +119,30 @@
   height:132px!important;
 }
 
+.certificate-v3-code{
+  z-index:5!important;
+  right:58px!important;
+  bottom:24px!important;
+  padding:2px 6px!important;
+  background:#ffffffcc!important;
+}
+
 @media(max-width:1100px){
   .certificate-v3-header{grid-template-columns:140px minmax(260px,320px) 140px!important}
-  .certificate-v3-logo{max-width:310px!important;height:78px!important}
+  .certificate-v3-logo{width:310px!important;max-width:310px!important;height:78px!important;background-size:70px auto!important;background-position:12px center!important}
+  .certificate-v3-header:before{top:6px!important;font-size:39px!important}
+  .certificate-v3-header:after{top:51px!important;font-size:6.5px!important;letter-spacing:3px!important}
   .certificate-v3-footer{width:88%!important;grid-template-columns:minmax(0,1fr) 150px minmax(0,1fr)!important;column-gap:36px!important}
   .certificate-v3-signature-script{font-size:20px!important}
   .certificate-v3-microcopy.micro-left{left:-86px!important}.certificate-v3-microcopy.micro-right{right:-86px!important}
 }
 
 @media(max-width:780px){
-  .certificate-v3-header{grid-template-columns:1fr!important;min-height:auto!important}
-  .certificate-v3-logo{max-width:285px!important;height:76px!important}
+  .certificate-v3-header{grid-template-columns:1fr!important;min-height:132px!important}
+  .certificate-v3-logo{width:285px!important;max-width:285px!important;height:76px!important;background-size:68px auto!important;background-position:12px center!important}
+  .certificate-v3-header:before{top:73px!important;left:50%!important;transform:translateX(-50%)!important;font-size:34px!important}
+  .certificate-v3-header:after{top:112px!important;left:50%!important;transform:translateX(-50%)!important;font-size:6px!important;letter-spacing:2.6px!important}
+  .certificate-v3-meta-item p{white-space:normal!important}
   .certificate-v3-footer{
     grid-template-columns:1fr!important;
     grid-template-areas:'seal' 'professor' 'platform'!important;
@@ -124,21 +164,40 @@
     margin-bottom:1.6mm!important;
   }
   .certificate-v3-logo{
-    content:url('/branding/kognia-logo-certificate.svg')!important;
+    content:normal!important;
     position:static!important;
     inset:auto!important;
     width:82mm!important;
     max-width:82mm!important;
     height:18mm!important;
     margin:0 auto!important;
-    object-fit:contain!important;
+    object-fit:none!important;
+    object-position:9999px 9999px!important;
+    background:transparent url('/branding/kognia-isotipo.png') 4mm center/17mm auto no-repeat!important;
+    print-color-adjust:exact!important;
+    -webkit-print-color-adjust:exact!important;
+  }
+  .certificate-v3-header:before{
+    left:50%!important;
+    top:1.4mm!important;
+    transform:translateX(-18%)!important;
+    font-size:24pt!important;
+    letter-spacing:-1pt!important;
+  }
+  .certificate-v3-header:after{
+    left:50%!important;
+    top:13.1mm!important;
+    transform:translateX(-1%)!important;
+    font-size:4.5pt!important;
+    letter-spacing:2.1pt!important;
   }
 
   .certificate-v3-meta{
     grid-template-columns:1fr 1px 1fr!important;
-    width:145mm!important;
-    gap:9mm!important;
+    width:160mm!important;
+    gap:10mm!important;
   }
+  .certificate-v3-meta-item p{white-space:nowrap!important}
 
   .certificate-v3-footer{
     display:grid!important;
@@ -149,11 +208,11 @@
     column-gap:12mm!important;
     width:190mm!important;
     margin:auto auto 0!important;
-    padding:8mm 0 8mm!important;
+    padding:8mm 0 9mm!important;
   }
   .certificate-v3-microcopy{
     position:absolute!important;
-    bottom:8mm!important;
+    bottom:9mm!important;
     width:24mm!important;
     font-size:4pt!important;
     letter-spacing:1.7pt!important;
@@ -190,4 +249,16 @@
   }
   .certificate-v3-seal-core{width:25mm!important;height:25mm!important}
   .certificate-v3-seal-stars{font-size:4pt!important;letter-spacing:.9pt!important}
+
+  .certificate-v3-code{
+    display:flex!important;
+    visibility:visible!important;
+    z-index:10!important;
+    right:11mm!important;
+    bottom:4.8mm!important;
+    padding:.6mm 1.5mm!important;
+    background:#fff!important;
+    font-size:4.6pt!important;
+  }
+  .certificate-v3-code strong{font-size:4.8pt!important;letter-spacing:.5pt!important}
 }
