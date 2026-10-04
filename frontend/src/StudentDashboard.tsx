@@ -33,13 +33,21 @@ type StudentDashboard = {
   }>;
 };
 
-const statCards = [
+type StatCard = {
+  key: keyof StudentDashboard['stats'];
+  label: string;
+  icon: string;
+  tone: string;
+  suffix?: string;
+};
+
+const statCards: StatCard[] = [
   { key: 'activeCourses', label: 'Cursos activos', icon: '▰', tone: 'cyan' },
   { key: 'completedCourses', label: 'Cursos completados', icon: '✓', tone: 'violet' },
   { key: 'completedLessons', label: 'Lecciones completadas', icon: '▶', tone: 'blue' },
   { key: 'averageProgressPercent', label: 'Progreso promedio', icon: '↗', tone: 'indigo', suffix: '%' },
   { key: 'certificateCount', label: 'Certificados', icon: '◆', tone: 'gold' },
-] as const;
+];
 
 export function StudentDashboardPage() {
   const session = getSession();
