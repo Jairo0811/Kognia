@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import { App } from './App';
-import { BillingPage, InstructorDashboardPage, StudentDashboardPage } from './block3';
+import { BillingPage, InstructorDashboardPage } from './block3';
+import { StudentDashboardPage } from './StudentDashboard';
 import { AdminPage, CourseReviewsPage, FavoritesPage, NotificationsPage } from './block4';
 import { EngagementCatalogPage } from './engagementCatalog';
 import { AnalyticsPage } from './finalBlock';
