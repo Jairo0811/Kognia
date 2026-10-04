@@ -13,6 +13,7 @@ import './certificate-print-fixes.css';
 import './certificate-v2.css';
 import './certificate-copy-fixes.css';
 import './branding-official.css';
+import './site-final-polish.css';
 import './certificate-document-v3-fixes.css';
 import './certificate-document-v3-final.css';
 import './certificate-print-parity.css';
