@@ -28,6 +28,8 @@
   .certificate-sheet {
     position: fixed !important;
     inset: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
     box-sizing: border-box !important;
     width: 100% !important;
     height: 100% !important;
@@ -182,11 +184,13 @@
 
   .certificate-signatures {
     display: grid !important;
-    grid-template-columns: minmax(0,1fr) 27mm minmax(0,1fr) !important;
+    grid-template-columns: minmax(0,1fr) 30mm minmax(0,1fr) !important;
     align-items: end !important;
     gap: 9mm !important;
-    max-width: 205mm !important;
-    margin: 4mm auto 0 !important;
+    width: 100% !important;
+    max-width: 215mm !important;
+    margin: auto auto 0 !important;
+    padding-top: 5mm !important;
   }
 
   .certificate-seal {
@@ -194,28 +198,35 @@
   }
 
   .certificate-seal-ring {
-    width: 22mm !important;
-    height: 22mm !important;
+    width: 25mm !important;
+    height: 25mm !important;
     border-width: 1.6mm !important;
   }
 
   .certificate-seal-ring:before {
-    transform: translateY(-7.2mm) !important;
-    font-size: 5.4pt !important;
+    transform: translateY(-8mm) !important;
+    font-size: 5.5pt !important;
   }
 
   .certificate-seal-ring span {
-    font-size: 23pt !important;
+    font-size: 25pt !important;
+  }
+
+  .certificate-signature {
+    overflow: visible !important;
   }
 
   .certificate-signature-script {
-    max-width: 52mm !important;
-    font-size: 17pt !important;
-    line-height: 1.05 !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    font-size: 15pt !important;
+    line-height: 1.08 !important;
+    white-space: nowrap !important;
   }
 
   .certificate-signature i {
-    max-width: 48mm !important;
+    max-width: 56mm !important;
     margin-bottom: 1.3mm !important;
   }
 
@@ -230,7 +241,8 @@
   .certificate-verification-line {
     display: flex !important;
     margin-top: 2.5mm !important;
-    font-size: 6pt !important;
+    margin-bottom: 1mm !important;
+    font-size: 6.2pt !important;
     letter-spacing: .2pt !important;
   }
 
