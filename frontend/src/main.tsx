@@ -10,6 +10,14 @@ import './kognia-home-sections.css';
 import './kognia-product.css';
 import './student-dashboard-layout-fix.css';
 import './certificate-print-fixes.css';
+import './certificate-v2.css';
+import './certificate-copy-fixes.css';
+import './branding-official.css';
+import './certificate-document-v3-fixes.css';
+import './certificate-document-v3-final.css';
+import './certificate-print-parity.css';
+import './certificate-print-parity-v2.css';
+import './certificate-ui-polish.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },

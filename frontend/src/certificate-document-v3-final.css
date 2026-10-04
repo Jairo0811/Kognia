@@ -1,0 +1,258 @@
+/* Certificate V3 final balancing pass based on printed PDF review. */
+
+/* Use real vector brand assets. Do not rebuild or hide the wordmark in CSS. */
+.certificate-v3-header{
+  position:relative!important;
+  grid-template-columns:1fr minmax(320px,390px) 1fr!important;
+  align-items:start!important;
+  min-height:102px!important;
+}
+.certificate-v3-header:before,
+.certificate-v3-header:after{
+  content:none!important;
+  display:none!important;
+}
+.certificate-v3-logo{
+  content:normal!important;
+  position:static!important;
+  inset:auto!important;
+  justify-self:center!important;
+  align-self:start!important;
+  display:block!important;
+  width:100%!important;
+  max-width:385px!important;
+  height:96px!important;
+  margin:0 auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:none!important;
+}
+
+/* Keep professor and academic period on a single clear row. */
+.certificate-v3-meta{
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+  width:min(790px,78%)!important;
+  gap:38px!important;
+}
+.certificate-v3-meta-item{min-width:0!important}
+.certificate-v3-meta-item p{white-space:nowrap!important}
+.certificate-v3-meta-icon{font-size:16px!important}
+
+/* Three independent footer zones: professor | seal | Kognia. */
+.certificate-v3-footer{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 190px minmax(0,1fr)!important;
+  grid-template-areas:'professor seal platform'!important;
+  align-items:end!important;
+  column-gap:78px!important;
+  width:min(1080px,87%)!important;
+  margin:auto auto 0!important;
+  padding:44px 0 42px!important;
+}
+.certificate-v3-microcopy{
+  position:absolute!important;
+  bottom:38px!important;
+  width:110px!important;
+  pointer-events:none!important;
+}
+.certificate-v3-microcopy.micro-left{left:-138px!important;text-align:left!important}
+.certificate-v3-microcopy.micro-right{right:-138px!important;text-align:right!important}
+.certificate-v3-signature.professor-signature{grid-area:professor!important}
+.certificate-v3-seal{grid-area:seal!important}
+.certificate-v3-signature.platform-signature{grid-area:platform!important}
+
+.certificate-v3-signature{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:0 24px!important;
+  overflow:visible!important;
+}
+.certificate-v3-signature-script{
+  width:100%!important;
+  min-height:42px!important;
+  padding:0 8px!important;
+  overflow:visible!important;
+  font-size:24px!important;
+  line-height:1.05!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+.certificate-v3-signature i{
+  width:100%!important;
+  max-width:305px!important;
+  margin:8px auto 9px!important;
+}
+
+.certificate-v3-seal{
+  justify-self:center!important;
+  align-self:end!important;
+  width:190px!important;
+}
+.certificate-v3-seal-core{
+  width:136px!important;
+  height:136px!important;
+}
+.certificate-v3-seal-core img{
+  display:block!important;
+  width:72%!important;
+  height:72%!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+/* Keep the verification code visible and away from the frame. */
+.certificate-v3-code{
+  z-index:20!important;
+  right:62px!important;
+  bottom:26px!important;
+  padding:3px 7px!important;
+  border-radius:4px!important;
+  background:#ffffffee!important;
+  color:#4f6598!important;
+  font-size:9px!important;
+}
+.certificate-v3-code strong{color:#123d98!important;font-size:9px!important}
+
+@media(max-width:1100px){
+  .certificate-v3-header{grid-template-columns:140px minmax(270px,330px) 140px!important;min-height:88px!important}
+  .certificate-v3-logo{max-width:325px!important;height:82px!important}
+  .certificate-v3-footer{width:89%!important;grid-template-columns:minmax(0,1fr) 155px minmax(0,1fr)!important;column-gap:38px!important}
+  .certificate-v3-signature-script{font-size:20px!important}
+  .certificate-v3-microcopy.micro-left{left:-88px!important}.certificate-v3-microcopy.micro-right{right:-88px!important}
+  .certificate-v3-seal-core{width:112px!important;height:112px!important}
+}
+
+@media(max-width:780px){
+  .certificate-v3-header{grid-template-columns:1fr!important;min-height:auto!important}
+  .certificate-v3-logo{max-width:295px!important;height:80px!important}
+  .certificate-v3-meta-item p{white-space:normal!important}
+  .certificate-v3-footer{
+    grid-template-columns:1fr!important;
+    grid-template-areas:'seal' 'professor' 'platform'!important;
+    row-gap:24px!important;
+    width:100%!important;
+    padding-top:30px!important;
+  }
+  .certificate-v3-microcopy{display:none!important}
+  .certificate-v3-seal{width:auto!important}
+}
+
+@media print{
+  .certificate-v3-header{
+    display:grid!important;
+    grid-template-columns:42mm 86mm 42mm!important;
+    justify-content:center!important;
+    align-items:start!important;
+    min-height:21mm!important;
+    margin-bottom:1.4mm!important;
+  }
+  .certificate-v3-logo{
+    content:normal!important;
+    position:static!important;
+    inset:auto!important;
+    width:86mm!important;
+    max-width:86mm!important;
+    height:20mm!important;
+    margin:0 auto!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    background:none!important;
+    print-color-adjust:exact!important;
+    -webkit-print-color-adjust:exact!important;
+  }
+
+  .certificate-v3-meta{
+    grid-template-columns:1fr 1px 1fr!important;
+    width:154mm!important;
+    gap:10mm!important;
+    margin-top:3mm!important;
+  }
+  .certificate-v3-meta-item p{
+    white-space:nowrap!important;
+    font-size:7.8pt!important;
+    line-height:1.3!important;
+  }
+  .certificate-v3-meta-item strong{font-size:8.2pt!important}
+  .certificate-v3-meta-icon{width:8mm!important;height:8mm!important;flex-basis:8mm!important;font-size:7.5pt!important}
+  .certificate-v3-recognition{font-size:7.6pt!important;margin-top:2.6mm!important}
+
+  .certificate-v3-footer{
+    display:grid!important;
+    grid-template-columns:69mm 32mm 69mm!important;
+    grid-template-areas:'professor seal platform'!important;
+    justify-content:center!important;
+    align-items:end!important;
+    column-gap:12mm!important;
+    width:194mm!important;
+    margin:auto auto 0!important;
+    padding:7mm 0 10mm!important;
+  }
+  .certificate-v3-microcopy{
+    position:absolute!important;
+    bottom:10mm!important;
+    width:24mm!important;
+    font-size:4pt!important;
+    letter-spacing:1.7pt!important;
+  }
+  .certificate-v3-microcopy.micro-left{left:-32mm!important}
+  .certificate-v3-microcopy.micro-right{right:-32mm!important}
+
+  .certificate-v3-signature{
+    width:69mm!important;
+    min-width:69mm!important;
+    padding:0 5mm!important;
+    overflow:visible!important;
+  }
+  .certificate-v3-signature-script{
+    width:59mm!important;
+    min-height:7mm!important;
+    padding:0!important;
+    font-size:11.5pt!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .certificate-v3-signature i{
+    width:59mm!important;
+    max-width:59mm!important;
+    margin:1.4mm auto 1.7mm!important;
+  }
+  .certificate-v3-signature strong{font-size:7pt!important}
+  .certificate-v3-signature small{font-size:4.6pt!important;letter-spacing:.75pt!important}
+
+  .certificate-v3-seal{
+    width:32mm!important;
+    justify-self:center!important;
+    align-self:end!important;
+  }
+  .certificate-v3-seal-core{
+    width:27mm!important;
+    height:27mm!important;
+    print-color-adjust:exact!important;
+    -webkit-print-color-adjust:exact!important;
+  }
+  .certificate-v3-seal-core img{
+    display:block!important;
+    width:72%!important;
+    height:72%!important;
+    object-fit:contain!important;
+    opacity:1!important;
+    visibility:visible!important;
+  }
+  .certificate-v3-seal-stars{font-size:4pt!important;letter-spacing:.9pt!important}
+
+  .certificate-v3-code{
+    display:flex!important;
+    visibility:visible!important;
+    z-index:30!important;
+    right:12mm!important;
+    bottom:6mm!important;
+    padding:.8mm 1.8mm!important;
+    background:#fff!important;
+    color:#4f6598!important;
+    font-size:5.3pt!important;
+  }
+  .certificate-v3-code strong{font-size:5.5pt!important;letter-spacing:.55pt!important}
+}
