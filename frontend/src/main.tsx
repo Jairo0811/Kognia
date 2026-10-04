@@ -9,6 +9,7 @@ import './kognia-overrides.css';
 import './kognia-home-sections.css';
 import './kognia-product.css';
 import './student-dashboard-layout-fix.css';
+import './certificate-print-fixes.css';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
