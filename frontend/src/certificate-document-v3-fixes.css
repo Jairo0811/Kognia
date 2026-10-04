@@ -1,0 +1,178 @@
+/* Final print-safe corrections for Certificate V3. */
+
+/* The current full lockup asset is optimized for dark backgrounds. On the
+   white certificate, use the official Kognia isotype as a real replaced image
+   and rebuild the dark wordmark beside it. This keeps the official symbol
+   visible in browser print/PDF instead of relying on background images. */
+.certificate-v3-header{
+  position:relative!important;
+}
+.certificate-v3-logo{
+  content:url('/branding/kognia-isotipo.png')!important;
+  position:absolute!important;
+  left:calc(50% - 178px)!important;
+  top:0!important;
+  width:82px!important;
+  height:82px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+}
+.certificate-v3-header:before{
+  content:'Kognia'!important;
+  position:absolute!important;
+  left:calc(50% - 82px)!important;
+  top:7px!important;
+  z-index:2!important;
+  color:#071b56!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif!important;
+  font-size:47px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  letter-spacing:-2px!important;
+}
+.certificate-v3-header:after{
+  content:'LEARN  •  CONNECT  •  GROW'!important;
+  position:absolute!important;
+  left:calc(50% - 78px)!important;
+  top:60px!important;
+  z-index:2!important;
+  color:#29417b!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif!important;
+  font-size:8px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:4px!important;
+  white-space:nowrap!important;
+}
+
+/* Make the academic metadata an unequivocal two-column row. */
+.certificate-v3-meta{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+  align-items:center!important;
+}
+.certificate-v3-meta-item{min-width:0!important}
+
+/* Signatures must read as three independent zones, never as one shared line. */
+.certificate-v3-footer{
+  grid-template-columns:90px minmax(280px,1fr) 190px minmax(280px,1fr) 90px!important;
+  column-gap:48px!important;
+  align-items:end!important;
+  margin-top:auto!important;
+  padding-top:34px!important;
+}
+.certificate-v3-signature{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:0 18px!important;
+  overflow:visible!important;
+}
+.certificate-v3-signature-script{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:38px!important;
+  padding:0 5px!important;
+  overflow:visible!important;
+  font-size:23px!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+.certificate-v3-signature i{
+  width:100%!important;
+  max-width:270px!important;
+  margin:6px auto 8px!important;
+}
+.certificate-v3-seal{
+  justify-self:center!important;
+  width:190px!important;
+}
+.certificate-v3-seal-core{
+  width:132px!important;
+  height:132px!important;
+}
+
+@media(max-width:1100px){
+  .certificate-v3-logo{left:calc(50% - 150px)!important;width:70px!important;height:70px!important}
+  .certificate-v3-header:before{left:calc(50% - 68px)!important;top:6px!important;font-size:39px!important}
+  .certificate-v3-header:after{left:calc(50% - 65px)!important;top:51px!important;font-size:6.5px!important;letter-spacing:3px!important}
+  .certificate-v3-footer{grid-template-columns:62px minmax(205px,1fr) 150px minmax(205px,1fr) 62px!important;column-gap:26px!important}
+  .certificate-v3-signature-script{font-size:19px!important}
+  .certificate-v3-seal{width:150px!important}.certificate-v3-seal-core{width:108px!important;height:108px!important}
+}
+
+@media(max-width:780px){
+  .certificate-v3-logo{position:relative!important;left:auto!important;top:auto!important;justify-self:center!important;width:70px!important;height:70px!important}
+  .certificate-v3-header:before{left:50%!important;top:72px!important;transform:translateX(-50%)!important;font-size:34px!important}
+  .certificate-v3-header:after{left:50%!important;top:111px!important;transform:translateX(-50%)!important;font-size:6px!important;letter-spacing:2.6px!important}
+  .certificate-v3-header{min-height:132px!important}
+  .certificate-v3-footer{grid-template-columns:1fr!important;row-gap:22px!important;padding-top:26px!important}
+  .certificate-v3-seal{width:auto!important}
+  .certificate-v3-signature{padding:0 12px!important}.certificate-v3-signature-script{font-size:22px!important}
+}
+
+@media print{
+  .certificate-v3-header{min-height:19mm!important}
+  .certificate-v3-logo{
+    content:url('/branding/kognia-isotipo.png')!important;
+    left:calc(50% - 34mm)!important;
+    top:.2mm!important;
+    width:17mm!important;
+    height:17mm!important;
+  }
+  .certificate-v3-header:before{
+    left:calc(50% - 14mm)!important;
+    top:1.4mm!important;
+    font-size:24pt!important;
+    letter-spacing:-1pt!important;
+  }
+  .certificate-v3-header:after{
+    left:calc(50% - 13mm)!important;
+    top:13.2mm!important;
+    font-size:4.5pt!important;
+    letter-spacing:2.1pt!important;
+  }
+
+  .certificate-v3-meta{
+    display:grid!important;
+    grid-template-columns:1fr 1px 1fr!important;
+    width:138mm!important;
+    gap:7mm!important;
+  }
+
+  .certificate-v3-footer{
+    display:grid!important;
+    grid-template-columns:18mm 64mm 34mm 64mm 18mm!important;
+    column-gap:6mm!important;
+    align-items:end!important;
+    width:100%!important;
+    margin-top:auto!important;
+    padding:5mm 4mm 7mm!important;
+  }
+  .certificate-v3-signature{
+    width:64mm!important;
+    min-width:64mm!important;
+    padding:0 3mm!important;
+    overflow:visible!important;
+  }
+  .certificate-v3-signature-script{
+    width:58mm!important;
+    min-height:6.5mm!important;
+    padding:0!important;
+    overflow:visible!important;
+    font-size:12pt!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .certificate-v3-signature i{
+    width:56mm!important;
+    max-width:56mm!important;
+    margin:1.2mm auto 1.4mm!important;
+  }
+  .certificate-v3-signature strong{font-size:6.8pt!important}
+  .certificate-v3-signature small{font-size:4.5pt!important;letter-spacing:.75pt!important;white-space:nowrap!important}
+  .certificate-v3-seal{width:34mm!important;justify-self:center!important}
+  .certificate-v3-seal-core{width:25mm!important;height:25mm!important}
+  .certificate-v3-seal-stars{font-size:4pt!important;letter-spacing:.9pt!important;white-space:nowrap!important}
+  .certificate-v3-microcopy{font-size:4pt!important;letter-spacing:1.8pt!important}
+}
