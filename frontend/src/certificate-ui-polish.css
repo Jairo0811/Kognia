@@ -50,9 +50,22 @@
 .certificate-v3-presented span{display:inline-flex;align-items:center;gap:8px}
 .certificate-v3-presented span svg{color:#315ec5;font-size:10px}
 
-.certificate-v3-meta-item{padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,#f8fbff,#f1f6ff);box-shadow:inset 0 0 0 1px #dce7ff}
-.certificate-v3-meta-icon{box-shadow:0 5px 14px #1b56bf18}
+/* Keep Professor / Periodo académico formal and centered without UI-card boxes. */
+.certificate-v3-meta-item{
+  padding:2px 4px;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.certificate-v3-meta-item:first-child{justify-content:flex-end;padding-right:10px}
+.certificate-v3-meta-item:last-child{justify-content:flex-start;padding-left:10px}
+.certificate-v3-meta-icon{
+  box-shadow:none;
+  background:#f7faff;
+  border-color:#b8ccff;
+}
 .certificate-v3-meta-icon svg{width:16px;height:16px;color:#1461ff}
+.certificate-v3-meta-divider{background:linear-gradient(180deg,transparent,#9eb3e2 18%,#9eb3e2 82%,transparent)}
 .certificate-v3-recognition{display:flex;align-items:center;justify-content:center;gap:8px}
 .certificate-v3-recognition svg{color:#d49b1f;font-size:12px}
 
@@ -94,14 +107,25 @@
   .certificate-v3-nav > div a svg{width:16px}
   .certificate-v3-toolbar-actions button span{display:none}
   .certificate-v3-toolbar-actions button{min-width:42px;padding:9px 12px}
-  .certificate-v3-meta-item{padding:10px 12px}
+  .certificate-v3-meta-item,
+  .certificate-v3-meta-item:first-child,
+  .certificate-v3-meta-item:last-child{justify-content:center;padding:5px 0}
 }
 
 @media print{
   .certificate-v3-ribbon-icon{font-size:9pt!important;color:#76ddff!important;filter:none!important}
   .certificate-v3-presented span svg{font-size:5pt!important}
-  .certificate-v3-meta-item{padding:1.2mm 2mm!important;border-radius:2mm!important;background:#f7faff!important;box-shadow:inset 0 0 0 .25mm #dce7ff!important}
+  .certificate-v3-meta-item{
+    padding:.5mm 1mm!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .certificate-v3-meta-item:first-child{justify-content:flex-end!important;padding-right:2.5mm!important}
+  .certificate-v3-meta-item:last-child{justify-content:flex-start!important;padding-left:2.5mm!important}
+  .certificate-v3-meta-icon{background:#f7faff!important;box-shadow:none!important}
   .certificate-v3-meta-icon svg{width:3.5mm!important;height:3.5mm!important}
+  .certificate-v3-meta-divider{height:10mm!important;background:#a9b9e2!important}
   .certificate-v3-recognition{gap:1.5mm!important}
   .certificate-v3-recognition svg{font-size:6pt!important;color:#b98216!important}
   .certificate-v3-code svg{font-size:4.8pt!important}
