@@ -1,4 +1,18 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBell,
+  faBookOpen,
+  faCertificate,
+  faChartLine,
+  faCompass,
+  faGaugeHigh,
+  faHeart,
+  faHouse,
+  faLayerGroup,
+  faShieldHalved,
+  faTags,
+} from '@fortawesome/free-solid-svg-icons';
 import { App } from './App';
 import { BillingPage, InstructorDashboardPage } from './block3';
 import { StudentDashboardPage } from './StudentDashboard';
@@ -19,18 +33,25 @@ export function Portal() {
     <a className="skip-link" href="#main-content">Saltar al contenido principal</a>
     {session && (
       <aside className="account-nav" aria-label="Accesos de cuenta">
+        <NavLink className="account-nav-brand" to="/" end aria-label="Kognia, inicio">
+          <img src="/branding/kognia-logo.png" alt="Kognia" />
+        </NavLink>
         <nav>
-          <Link to="/">Inicio</Link>
-          <Link to="/discover">Descubrir</Link>
-          <Link to="/billing">Planes</Link>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/analytics">Analíticas</Link>
-          <Link to="/certificates">Certificados</Link>
-          <Link to="/favorites">Favoritos</Link>
-          <Link to="/notifications">Notificaciones</Link>
-          {isInstructor && <Link to="/instructor/dashboard">Métricas instructor</Link>}
-          {isAdmin && <Link to="/admin">Administración</Link>}
+          <NavLink to="/" end><FontAwesomeIcon icon={faHouse} /><span>Inicio</span></NavLink>
+          <NavLink to="/discover"><FontAwesomeIcon icon={faCompass} /><span>Descubrir</span></NavLink>
+          <NavLink to="/billing"><FontAwesomeIcon icon={faTags} /><span>Planes</span></NavLink>
+          <NavLink to="/dashboard"><FontAwesomeIcon icon={faGaugeHigh} /><span>Dashboard</span></NavLink>
+          <NavLink to="/analytics"><FontAwesomeIcon icon={faChartLine} /><span>Analíticas</span></NavLink>
+          <NavLink to="/certificates"><FontAwesomeIcon icon={faCertificate} /><span>Certificados</span></NavLink>
+          <NavLink to="/favorites"><FontAwesomeIcon icon={faHeart} /><span>Favoritos</span></NavLink>
+          <NavLink to="/notifications"><FontAwesomeIcon icon={faBell} /><span>Notificaciones</span></NavLink>
+          {isInstructor && <NavLink to="/instructor/dashboard"><FontAwesomeIcon icon={faBookOpen} /><span>Métricas instructor</span></NavLink>}
+          {isAdmin && <NavLink to="/admin"><FontAwesomeIcon icon={faShieldHalved} /><span>Administración</span></NavLink>}
         </nav>
+        <div className="account-nav-footer" aria-hidden="true">
+          <FontAwesomeIcon icon={faLayerGroup} />
+          <span>Aprende · Conecta · Crece</span>
+        </div>
       </aside>
     )}
     <div id="main-content" tabIndex={-1}>
