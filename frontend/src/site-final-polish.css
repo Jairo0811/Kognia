@@ -162,12 +162,32 @@ main:not(.k-home)>section>ul>li:hover{
   box-shadow:0 16px 38px #0004;
 }
 
-/* Student dashboard: consistent icon treatment after Font Awesome upgrade. */
+/* Student dashboard: official marks + consistent Font Awesome icon treatment. */
+.student-dashboard-back{align-items:center;gap:8px}
+.student-dashboard-back svg{width:12px}
 .student-dashboard-stat-icon svg,
 .student-dashboard-quick-links nav>a>span svg,
 .student-dashboard-activity-empty>span svg{
   width:1em;
   height:1em;
+}
+.student-dashboard-empty-icon{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.student-dashboard-empty-icon img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 18px #176fff45);
+}
+.student-dashboard-course-thumb img{
+  display:block;
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 24px #0a102f66);
 }
 .student-dashboard-stat:hover{
   transform:translateY(-2px);
@@ -183,7 +203,13 @@ main:not(.k-home)>section>ul>li:hover{
 @media(max-width:1100px) and (min-width:721px){
   .account-nav{width:92px!important;padding-inline:10px!important}
   .account-nav-brand{justify-content:center!important;margin-inline:0!important;padding:0!important}
-  .account-nav-brand img{width:58px;height:54px;object-fit:cover;object-position:left center}
+  .account-nav-brand img{
+    content:url('/branding/kognia-isotipo.png');
+    width:54px;
+    height:54px;
+    object-fit:contain;
+    object-position:center;
+  }
   .account-nav nav a{justify-content:center;padding:0!important}
   .account-nav nav a span{display:none}
   .account-nav nav a svg{width:20px;flex-basis:20px}
