@@ -68,6 +68,24 @@
   box-shadow:none!important;
 }
 
+/* Student dashboard marks. */
+.student-dashboard-empty-icon,
+.student-dashboard-course-thumb span{
+  font-size:0!important;
+  background:transparent var(--kognia-isotipo) center/contain no-repeat!important;
+  box-shadow:none!important;
+}
+.student-dashboard-empty-icon{
+  width:58px!important;
+  height:58px!important;
+  border-radius:0!important;
+}
+.student-dashboard-course-thumb span{
+  display:block!important;
+  width:58px!important;
+  height:58px!important;
+}
+
 /* Certificate navigation and credential surfaces. */
 .certificate-brand-mark{
   font-size:0!important;
