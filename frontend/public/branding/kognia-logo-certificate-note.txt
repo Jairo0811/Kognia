@@ -1,0 +1,1 @@
+Certificate header uses /branding/kognia-logo-certificate.png, a print-safe transparent dark lockup derived from the approved Kognia identity.
