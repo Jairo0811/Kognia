@@ -1,5 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft,
+  faBell,
+  faBookOpen,
+  faCertificate,
+  faChartLine,
+  faCircleCheck,
+  faClockRotateLeft,
+  faHeart,
+  faPlay,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons';
 import { api, getSession } from './lib/api';
 import './student-dashboard.css';
 
@@ -36,17 +50,17 @@ type StudentDashboard = {
 type StatCard = {
   key: keyof StudentDashboard['stats'];
   label: string;
-  icon: string;
+  icon: IconDefinition;
   tone: string;
   suffix?: string;
 };
 
 const statCards: StatCard[] = [
-  { key: 'activeCourses', label: 'Cursos activos', icon: '▰', tone: 'cyan' },
-  { key: 'completedCourses', label: 'Cursos completados', icon: '✓', tone: 'violet' },
-  { key: 'completedLessons', label: 'Lecciones completadas', icon: '▶', tone: 'blue' },
-  { key: 'averageProgressPercent', label: 'Progreso promedio', icon: '↗', tone: 'indigo', suffix: '%' },
-  { key: 'certificateCount', label: 'Certificados', icon: '◆', tone: 'gold' },
+  { key: 'activeCourses', label: 'Cursos activos', icon: faBookOpen, tone: 'cyan' },
+  { key: 'completedCourses', label: 'Cursos completados', icon: faCircleCheck, tone: 'violet' },
+  { key: 'completedLessons', label: 'Lecciones completadas', icon: faPlay, tone: 'blue' },
+  { key: 'averageProgressPercent', label: 'Progreso promedio', icon: faChartLine, tone: 'indigo', suffix: '%' },
+  { key: 'certificateCount', label: 'Certificados', icon: faCertificate, tone: 'gold' },
 ];
 
 export function StudentDashboardPage() {
@@ -73,7 +87,7 @@ export function StudentDashboardPage() {
     <main className="student-dashboard-shell">
       <section className="student-dashboard-hero" aria-labelledby="student-dashboard-title">
         <div>
-          <Link className="student-dashboard-back" to="/">← Volver al inicio</Link>
+          <Link className="student-dashboard-back" to="/"><FontAwesomeIcon icon={faArrowLeft} /> Volver al inicio</Link>
           <p className="student-dashboard-eyebrow">Panel de aprendizaje</p>
           <h1 id="student-dashboard-title">Hola, {firstName}</h1>
           <p className="student-dashboard-subtitle">
@@ -112,7 +126,7 @@ export function StudentDashboardPage() {
                 const value = data.stats[stat.key];
                 return (
                   <article className={`student-dashboard-stat tone-${stat.tone}`} key={stat.key}>
-                    <span className="student-dashboard-stat-icon" aria-hidden="true">{stat.icon}</span>
+                    <span className="student-dashboard-stat-icon" aria-hidden="true"><FontAwesomeIcon icon={stat.icon} /></span>
                     <div>
                       <span className="student-dashboard-stat-label">{stat.label}</span>
                       <strong>{value}{stat.suffix ?? ''}</strong>
@@ -122,7 +136,7 @@ export function StudentDashboardPage() {
               })}
 
               <article className="student-dashboard-stat tone-green">
-                <span className="student-dashboard-stat-icon" aria-hidden="true">★</span>
+                <span className="student-dashboard-stat-icon" aria-hidden="true"><FontAwesomeIcon icon={faStar} /></span>
                 <div>
                   <span className="student-dashboard-stat-label">Evaluaciones aprobadas</span>
                   <strong>{data.stats.passedQuizAttempts} <small>/ {data.stats.quizAttempts}</small></strong>
@@ -143,7 +157,7 @@ export function StudentDashboardPage() {
 
               {data.courses.length === 0 ? (
                 <div className="student-dashboard-empty">
-                  <div className="student-dashboard-empty-icon" aria-hidden="true">K</div>
+                  <div className="student-dashboard-empty-icon" aria-hidden="true"><img src="/branding/kognia-isotipo.png" alt="" /></div>
                   <h3>Tu próxima habilidad empieza aquí</h3>
                   <p>Aún no estás inscrito en ningún curso. Explora el catálogo y empieza tu primera ruta de aprendizaje.</p>
                   <Link className="student-dashboard-btn student-dashboard-btn-primary" to="/discover">Descubrir cursos</Link>
@@ -153,7 +167,7 @@ export function StudentDashboardPage() {
                   {data.courses.map((course) => (
                     <article className="student-dashboard-course-card" key={course.enrollmentId}>
                       <div className="student-dashboard-course-thumb" aria-hidden="true">
-                        <span>K</span>
+                        <img src="/branding/kognia-isotipo.png" alt="" />
                       </div>
                       <div className="student-dashboard-course-body">
                         <div className="student-dashboard-course-title-row">
@@ -191,9 +205,9 @@ export function StudentDashboardPage() {
                 <p className="student-dashboard-kicker">Accesos rápidos</p>
                 <h2>Tu espacio Kognia</h2>
                 <nav aria-label="Accesos rápidos del estudiante">
-                  <Link to="/certificates"><span>◆</span><div><strong>Certificados</strong><small>Consulta tus logros</small></div><b>→</b></Link>
-                  <Link to="/favorites"><span>♥</span><div><strong>Favoritos</strong><small>Contenido guardado</small></div><b>→</b></Link>
-                  <Link to="/notifications"><span>●</span><div><strong>Notificaciones</strong><small>Novedades de tu cuenta</small></div><b>→</b></Link>
+                  <Link to="/certificates"><span><FontAwesomeIcon icon={faCertificate} /></span><div><strong>Certificados</strong><small>Consulta tus logros</small></div><b>→</b></Link>
+                  <Link to="/favorites"><span><FontAwesomeIcon icon={faHeart} /></span><div><strong>Favoritos</strong><small>Contenido guardado</small></div><b>→</b></Link>
+                  <Link to="/notifications"><span><FontAwesomeIcon icon={faBell} /></span><div><strong>Notificaciones</strong><small>Novedades de tu cuenta</small></div><b>→</b></Link>
                 </nav>
               </section>
             </aside>
@@ -209,7 +223,7 @@ export function StudentDashboardPage() {
 
             {data.recentActivity.length === 0 ? (
               <div className="student-dashboard-activity-empty">
-                <span aria-hidden="true">◌</span>
+                <span aria-hidden="true"><FontAwesomeIcon icon={faClockRotateLeft} /></span>
                 <p>Tu actividad aparecerá aquí cuando empieces a avanzar en tus cursos.</p>
               </div>
             ) : (
