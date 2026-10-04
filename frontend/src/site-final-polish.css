@@ -1,0 +1,235 @@
+/* Final Kognia product polish. Certificate-specific surfaces intentionally excluded. */
+
+:root{
+  --k-focus:#55d9ff;
+  --k-surface:#08162f;
+  --k-surface-2:#0b1c3a;
+  --k-border:#1b4276;
+  --k-border-strong:#2c64aa;
+  --k-muted:#8fa7cc;
+}
+
+::selection{background:#1b6cff;color:#fff}
+html{scroll-padding-top:88px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* Accessible focus treatment across the product. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+  outline:2px solid var(--k-focus)!important;
+  outline-offset:3px!important;
+}
+
+/* Authenticated product rail: real route state, official brand, consistent iconography. */
+.account-nav{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 0%,#1358d42a,transparent 24%),
+    linear-gradient(180deg,#061126 0%,#040a18 100%)!important;
+}
+.account-nav:before{display:none!important}
+.account-nav-brand{
+  display:flex!important;
+  align-items:center!important;
+  min-height:64px!important;
+  margin:0 8px 20px!important;
+  padding:0 8px!important;
+  border:0!important;
+  background:transparent!important;
+}
+.account-nav-brand img{
+  display:block;
+  width:154px;
+  height:56px;
+  object-fit:contain;
+  object-position:left center;
+}
+.account-nav nav{gap:6px!important}
+.account-nav nav a{
+  position:relative;
+  gap:12px;
+  min-height:44px!important;
+  padding:0 14px!important;
+  border:1px solid transparent;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.account-nav nav a svg{
+  width:17px;
+  flex:0 0 17px;
+  color:#5fcfff;
+  opacity:.78;
+  transition:color .18s ease,opacity .18s ease,transform .18s ease;
+}
+.account-nav nav a:hover{
+  background:#0b2042!important;
+  border-color:#173c70;
+  color:#fff!important;
+  transform:translateX(2px);
+}
+.account-nav nav a:hover svg{opacity:1;transform:scale(1.06)}
+.account-nav nav a.active,
+.account-nav nav a[aria-current='page']{
+  background:linear-gradient(135deg,#0d2c5e,#102754)!important;
+  border-color:#275895!important;
+  color:#fff!important;
+  box-shadow:inset 3px 0 0 #34d7ff,0 8px 24px #0002;
+}
+.account-nav nav a.active svg,
+.account-nav nav a[aria-current='page'] svg{color:#8c73ff;opacity:1}
+.account-nav a:nth-child(4){background:transparent;color:#8fa5c9;border-color:transparent}
+.account-nav a:nth-child(4).active{background:linear-gradient(135deg,#0d2c5e,#102754)!important;color:#fff!important;border-color:#275895!important}
+.account-nav-footer{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:auto;
+  padding:18px 12px 4px;
+  border-top:1px solid #17335c;
+  color:#667fa9;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.account-nav-footer svg{color:#4fcfff}
+
+/* Internal legacy/App header: keep the official brand visually stable. */
+#main-content>header:not(.k-topbar){box-shadow:0 10px 34px #0003}
+#main-content>header:not(.k-topbar) nav>a:first-child{
+  min-width:150px;
+  transition:opacity .18s ease;
+}
+#main-content>header:not(.k-topbar) nav>a:first-child:hover{opacity:.9}
+#main-content>header:not(.k-topbar) nav button{
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+#main-content>header:not(.k-topbar) nav button:hover{
+  transform:translateY(-1px);
+  border-color:#3976be;
+  background:#10254a;
+}
+
+/* Home refinement without changing its approved composition. */
+.k-topbar{transition:background .2s ease,border-color .2s ease}
+.k-topbar .k-brand,.k-footer .k-brand{transition:opacity .18s ease,transform .18s ease}
+.k-topbar .k-brand:hover,.k-footer .k-brand:hover{opacity:.94;transform:translateY(-1px)}
+.k-course-card,.k-feature-card,.k-plan-card{
+  will-change:transform;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important;
+}
+.k-course-card:hover,.k-feature-card:hover,.k-plan-card:hover{
+  border-color:#3475c9!important;
+  box-shadow:0 22px 55px #0006,0 0 0 1px #2774db22;
+}
+.k-btn:active{transform:translateY(0) scale(.99)}
+.k-footer .k-shell{min-height:58px}
+
+/* Generic product surfaces: cleaner form controls and richer states. */
+main:not(.k-home) input,
+main:not(.k-home) textarea,
+main:not(.k-home) select{
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+main:not(.k-home) input:hover,
+main:not(.k-home) textarea:hover,
+main:not(.k-home) select:hover{border-color:#315e99}
+main:not(.k-home) input:focus,
+main:not(.k-home) textarea:focus,
+main:not(.k-home) select:focus{
+  border-color:#2788e6!important;
+  box-shadow:0 0 0 3px #1d87df22!important;
+  background:#081a36!important;
+}
+main:not(.k-home) button,
+main:not(.k-home) a[role='button']{
+  transition:transform .16s ease,filter .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+main:not(.k-home) button:hover,
+main:not(.k-home) a[role='button']:hover{transform:translateY(-1px)}
+main:not(.k-home)>section,
+main:not(.k-home)>ul>li,
+main:not(.k-home)>section>ul>li{
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+main:not(.k-home)>ul>li:hover,
+main:not(.k-home)>section>ul>li:hover{
+  border-color:#2a5c9c;
+  box-shadow:0 16px 38px #0004;
+}
+
+/* Student dashboard: consistent icon treatment after Font Awesome upgrade. */
+.student-dashboard-stat-icon svg,
+.student-dashboard-quick-links nav>a>span svg,
+.student-dashboard-activity-empty>span svg{
+  width:1em;
+  height:1em;
+}
+.student-dashboard-stat:hover{
+  transform:translateY(-2px);
+  border-color:#315f9d;
+}
+.student-dashboard-stat{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.student-dashboard-panel{transition:border-color .18s ease,box-shadow .18s ease}
+.student-dashboard-panel:hover{border-color:#244f84}
+.student-dashboard-btn{transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}
+.student-dashboard-btn:hover{transform:translateY(-1px)}
+
+/* Compact product rail on medium screens. */
+@media(max-width:1100px) and (min-width:721px){
+  .account-nav{width:92px!important;padding-inline:10px!important}
+  .account-nav-brand{justify-content:center!important;margin-inline:0!important;padding:0!important}
+  .account-nav-brand img{width:58px;height:54px;object-fit:cover;object-position:left center}
+  .account-nav nav a{justify-content:center;padding:0!important}
+  .account-nav nav a span{display:none}
+  .account-nav nav a svg{width:20px;flex-basis:20px}
+  .account-nav-footer{justify-content:center;padding-inline:0}
+  .account-nav-footer span{display:none}
+  body:has(.account-nav):not(:has(.k-home)) #main-content{margin-left:92px!important}
+}
+
+/* Mobile: turn the rail into a scrollable bottom navigation instead of stealing width. */
+@media(max-width:720px){
+  html{scroll-padding-top:72px}
+  .account-nav{
+    top:auto!important;
+    right:0!important;
+    width:100%!important;
+    height:72px!important;
+    padding:8px 10px!important;
+    border-right:0!important;
+    border-top:1px solid #17365f;
+    box-shadow:0 -14px 36px #0006;
+  }
+  .account-nav-brand,.account-nav-footer{display:none!important}
+  .account-nav nav{
+    flex-direction:row!important;
+    gap:6px!important;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+  }
+  .account-nav nav::-webkit-scrollbar{display:none}
+  .account-nav nav a{
+    flex:0 0 62px;
+    min-height:54px!important;
+    justify-content:center;
+    flex-direction:column;
+    gap:4px;
+    padding:5px 6px!important;
+    font-size:9px!important;
+  }
+  .account-nav nav a span{display:block;max-width:58px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .account-nav nav a svg{width:17px;flex-basis:auto}
+  body:has(.account-nav):not(:has(.k-home)) #main-content{margin-left:0!important;padding-bottom:84px}
+  #main-content>header:not(.k-topbar) nav{width:calc(100% - 28px)!important;gap:14px!important;overflow-x:auto;white-space:nowrap}
+  #main-content>header:not(.k-topbar) nav>a:first-child{min-width:122px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
