@@ -65,21 +65,27 @@
 .certificate-v3-loading{display:flex;align-items:center;justify-content:center;gap:10px;color:#dfeaff}
 .certificate-v3-loading svg{color:#5edbff}
 
-/* Keep the official mark centered inside the medallion in both preview and PDF. */
-.certificate-v3-seal-core{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
-.certificate-v3-seal-official-logo{
-  position:absolute!important;
-  top:50%!important;
-  left:50%!important;
-  width:72%!important;
-  height:72%!important;
-  max-width:none!important;
-  object-fit:contain!important;
-  object-position:center center!important;
-  transform:translate(-50%,-50%)!important;
-  transform-origin:center center!important;
-  display:block!important;
-  visibility:visible!important;
+/* The old full lockup has transparent padding that makes the visible mark look
+   shifted even when its image box is mathematically centered. Hide it and use
+   the dedicated official isotype as the seal artwork instead. */
+.certificate-v3-seal-core{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+}
+.certificate-v3-seal-official-logo{display:none!important}
+.certificate-v3-seal-core::after{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:64%;
+  height:64%;
+  transform:translate(-50%,-50%);
+  background:url('/branding/kognia-isotipo.png') center center/contain no-repeat;
+  pointer-events:none;
 }
 
 @media(max-width:780px){
@@ -99,14 +105,12 @@
   .certificate-v3-recognition{gap:1.5mm!important}
   .certificate-v3-recognition svg{font-size:6pt!important;color:#b98216!important}
   .certificate-v3-code svg{font-size:4.8pt!important}
-  .certificate-v3-seal-official-logo{
-    top:50%!important;
-    left:50%!important;
-    width:70%!important;
-    height:70%!important;
-    object-fit:contain!important;
-    object-position:center center!important;
+  .certificate-v3-seal-core::after{
+    width:62%!important;
+    height:62%!important;
     transform:translate(-50%,-50%)!important;
-    transform-origin:center center!important;
+    background:url('/branding/kognia-isotipo.png') center center/contain no-repeat!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
   }
 }
