@@ -3,6 +3,12 @@ import { App } from './App';
 import { BillingPage, InstructorDashboardPage } from './block3';
 import { StudentDashboardPage } from './StudentDashboard';
 import { AdminPage, CourseReviewsPage, FavoritesPage, NotificationsPage } from './block4';
+import {
+  AcademicCertificatePreviewPage,
+  CertificateDetailPage,
+  CertificateVerifyPage,
+  CertificatesPage,
+} from './certificates';
 import { EngagementCatalogPage } from './engagementCatalog';
 import { AnalyticsPage } from './finalBlock';
 import { KogniaHome } from './KogniaHome';
@@ -23,6 +29,7 @@ export function Portal() {
           <Link to="/billing">Planes</Link>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/analytics">Analíticas</Link>
+          <Link to="/certificates">Certificados</Link>
           <Link to="/favorites">Favoritos</Link>
           <Link to="/notifications">Notificaciones</Link>
           {isInstructor && <Link to="/instructor/dashboard">Métricas instructor</Link>}
@@ -38,6 +45,10 @@ export function Portal() {
         <Route path="/dashboard" element={<StudentDashboardPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/instructor/dashboard" element={<InstructorDashboardPage />} />
+        <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/certificates/view/:verificationCode" element={<CertificateDetailPage />} />
+        <Route path="/certificates/verify/:verificationCode" element={<CertificateVerifyPage />} />
+        <Route path="/certificates/demo/:studentKey" element={<AcademicCertificatePreviewPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/courses/:courseId/reviews" element={<CourseReviewsPage />} />
