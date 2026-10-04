@@ -1,0 +1,18 @@
+.certificate-awarded{font-size:0!important}
+.certificate-awarded:after{
+  content:'Otorgado por haber completado satisfactoriamente la materia';
+  color:#283d70;
+  font-size:17px;
+}
+
+.certificate-recognition{font-size:0!important}
+.certificate-recognition:after{
+  content:'En reconocimiento a su dedicación, esfuerzo y culminación exitosa de la asignatura.';
+  color:#283c68;
+  font-size:14px;
+}
+
+@media print{
+  .certificate-awarded:after{font-size:9.5pt!important}
+  .certificate-recognition:after{font-size:7.6pt!important}
+}
