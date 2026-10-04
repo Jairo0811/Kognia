@@ -1,4 +1,4 @@
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'https://localhost:5001';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '';
 
 export type AuthSession = {
   accessToken: string;

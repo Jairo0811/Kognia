@@ -7,7 +7,7 @@ services:
       MSSQL_PID: "Developer"
       MSSQL_SA_PASSWORD: "${KOGNIA_SA_PASSWORD:-Kognia_Local_2026!}"
     ports:
-      - "1433:1433"
+      - "14330:1433"
     volumes:
       - kognia-sql-data:/var/opt/mssql
     healthcheck:

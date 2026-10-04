@@ -77,6 +77,21 @@ using (var scope = app.Services.CreateScope())
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await IdentitySeeder.SeedAsync(roleManager);
+
+    if (app.Environment.IsDevelopment())
+    {
+        var seedEmail = builder.Configuration["DevelopmentSeed:Email"];
+        var seedPassword = builder.Configuration["DevelopmentSeed:Password"];
+        var seedFirstName = builder.Configuration["DevelopmentSeed:FirstName"] ?? "Kognia";
+        var seedLastName = builder.Configuration["DevelopmentSeed:LastName"] ?? "Student";
+
+        if (!string.IsNullOrWhiteSpace(seedEmail) && !string.IsNullOrWhiteSpace(seedPassword))
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            await IdentitySeeder.SeedDevelopmentUserAsync(userManager, seedEmail, seedPassword, seedFirstName, seedLastName);
+        }
+    }
+
     await CatalogSeeder.SeedAsync(db);
     await BillingSeeder.SeedAsync(db);
 }
