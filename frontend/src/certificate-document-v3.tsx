@@ -140,7 +140,7 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
 
       <header className="certificate-v3-header">
         <p className="certificate-v3-corner-copy copy-left">CONOCIMIENTO<br />QUE CONECTA<br />OPORTUNIDADES</p>
-        <img className="certificate-v3-logo" src="/branding/kognia-logo-certificate.svg" alt="Kognia — Learn, Connect, Grow" />
+        <img className="certificate-v3-logo" src="/branding/kognia-logo.png" alt="Kognia — Learn, Connect, Grow" />
         <p className="certificate-v3-corner-copy copy-right">EDUCACIÓN<br />PARA UN<br />FUTURO REAL</p>
       </header>
 
@@ -202,7 +202,7 @@ function CertificateV3Artwork({ document }: { document: CertificateDocument }) {
         <div className="certificate-v3-seal" aria-label="Sello oficial Kognia">
           <span className="certificate-v3-seal-stars">✦ KOGNIA ✦</span>
           <div className="certificate-v3-seal-core">
-            <img src="/branding/kognia-isotipo-certificate.svg" alt="" aria-hidden="true" />
+            <img src="/branding/kognia-isotipo.png" alt="" aria-hidden="true" />
           </div>
         </div>
 
