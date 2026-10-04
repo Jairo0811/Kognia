@@ -11,6 +11,7 @@ import './kognia-product.css';
 import './student-dashboard-layout-fix.css';
 import './certificate-print-fixes.css';
 import './certificate-v2.css';
+import './certificate-copy-fixes.css';
 import './branding-official.css';
 
 const queryClient = new QueryClient({
